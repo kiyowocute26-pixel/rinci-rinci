@@ -168,11 +168,10 @@
             <div class="bg-slate-950 border border-slate-800/80 rounded-xl p-4 relative group">
               <div class="flex items-center justify-between mb-2">
                 <label class="text-xs font-bold uppercase tracking-wider text-emerald-400">100K UP</label>
-                <span id="label-fee-up" class="text-[10px] text-slate-400 master-only hidden">0.80% → 1.50%</span>
               </div>
               <input type="text" id="input-motion-up" placeholder="0"
                 class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2.5 text-white font-bold text-base focus:outline-none focus:border-emerald-500">
-              <div class="mt-2 text-[11px] text-slate-400 master-only hidden flex justify-between">
+              <div class="mt-2 text-[11px] text-slate-400 flex justify-between">
                 <span>Nett:</span>
                 <span id="preview-up-nett" class="font-bold text-emerald-400">0</span>
               </div>
@@ -182,11 +181,10 @@
             <div class="bg-slate-950 border border-slate-800/80 rounded-xl p-4 relative group">
               <div class="flex items-center justify-between mb-2">
                 <label class="text-xs font-bold uppercase tracking-wider text-teal-400">100K DOWN</label>
-                <span id="label-fee-down" class="text-[10px] text-slate-400 master-only hidden">0.55% → 1.50%</span>
               </div>
               <input type="text" id="input-motion-down" placeholder="0"
                 class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2.5 text-white font-bold text-base focus:outline-none focus:border-teal-500">
-              <div class="mt-2 text-[11px] text-slate-400 master-only hidden flex justify-between">
+              <div class="mt-2 text-[11px] text-slate-400 flex justify-between">
                 <span>Nett:</span>
                 <span id="preview-down-nett" class="font-bold text-teal-400">0</span>
               </div>
@@ -199,11 +197,10 @@
             <div class="bg-slate-950 border border-slate-800/80 rounded-xl p-4">
               <div class="flex items-center justify-between mb-2">
                 <label class="text-xs font-bold uppercase tracking-wider text-purple-400">E-WALLET</label>
-                <span id="label-fee-ew" class="text-[10px] text-slate-400 master-only hidden">1.50%</span>
               </div>
               <input type="text" id="input-motion-ewallet" placeholder="0"
                 class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2.5 text-white font-bold text-base focus:outline-none focus:border-purple-500">
-              <div class="mt-2 text-[11px] text-slate-400 master-only hidden flex justify-between">
+              <div class="mt-2 text-[11px] text-slate-400 flex justify-between">
                 <span>Nett:</span>
                 <span id="preview-ew-nett" class="font-bold text-purple-400">0</span>
               </div>
@@ -223,16 +220,16 @@
             <div class="sm:col-span-2 bg-slate-950 border border-slate-800/80 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div class="flex items-center gap-4 text-xs w-full sm:w-auto justify-around sm:justify-start">
                 <div>
-                  <span class="text-slate-400 block">PENDING (PANEL - DOC)</span>
+                  <span class="text-slate-400 block">PENDING</span>
                   <span id="live-pending" class="font-bold text-amber-400 text-sm">0</span>
                 </div>
                 <div class="h-8 w-px bg-slate-800"></div>
                 <div>
-                  <span class="text-slate-400 block">SISA (DOC - MOTION)</span>
+                  <span class="text-slate-400 block">SISA</span>
                   <span id="live-sisa" class="font-bold text-cyan-400 text-sm">0</span>
                 </div>
-                <div class="master-only hidden h-8 w-px bg-slate-800"></div>
-                <div class="master-only hidden">
+                <div class="h-8 w-px bg-slate-800"></div>
+                <div>
                   <span class="text-slate-400 block">TOTAL BERSIH</span>
                   <span id="live-total-bersih" class="font-bold text-emerald-400 text-sm">0</span>
                 </div>
@@ -257,10 +254,9 @@
               <i class="fa-solid fa-table-list text-indigo-400"></i>
               <span>Rekap Per Hari</span>
             </h2>
-            <p class="text-xs text-slate-400">Daftar rekonsiliasi harian situs aktif</p>
           </div>
 
-          <!-- Filter Rentang Tanggal -->
+          <!-- Filter Rentang Tanggal & Kotak Pending/Sisa -->
           <div class="flex flex-wrap items-center gap-2 w-full lg:w-auto">
             <span class="text-xs text-slate-400">Dari:</span>
             <input type="date" id="filterStartDate" class="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-white font-semibold focus:outline-none focus:border-indigo-500">
@@ -268,6 +264,14 @@
             <input type="date" id="filterEndDate" class="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-white font-semibold focus:outline-none focus:border-indigo-500">
             <button id="btnApplyFilter" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl text-xs">Filter</button>
             <button id="btnClearFilter" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl text-xs">Reset</button>
+
+            <!-- Kotak Total Pending & Sisa Filtered -->
+            <div id="filteredSummaryBox" class="flex items-center gap-2 bg-slate-950 border border-indigo-500/40 rounded-xl px-3 py-1.5 text-xs">
+              <div><span class="text-slate-400">Tot Pending:</span> <span id="filter-total-pending" class="font-bold text-amber-400">0</span></div>
+              <div class="w-px h-3 bg-slate-800"></div>
+              <div><span class="text-slate-400">Tot Sisa:</span> <span id="filter-total-sisa" class="font-bold text-cyan-400">0</span></div>
+            </div>
+
             <button id="btnExportCSV" class="master-only px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-200 transition-colors flex items-center gap-1.5 hidden">
               <i class="fa-solid fa-download text-indigo-400"></i>
               <span>Export CSV</span>
@@ -290,7 +294,7 @@
                 <th class="p-3 font-semibold">100K UP (KOTOR / NETT)</th>
                 <th class="p-3 font-semibold">100K DOWN (KOTOR / NETT)</th>
                 <th class="p-3 font-semibold">E-WALLET (KOTOR / NETT)</th>
-                <th class="p-3 font-semibold master-only hidden">TOTAL</th>
+                <th class="p-3 font-semibold">TOTAL</th>
                 <th class="p-3 font-semibold">WITHDRAW</th>
                 <th class="p-3 font-semibold">SISA</th>
                 <th class="p-3 font-semibold text-right">AKSI</th>
@@ -299,9 +303,6 @@
             <tbody id="recapTableBody" class="divide-y divide-slate-800/60 font-medium">
               <!-- Rendered via JS -->
             </tbody>
-            <tfoot id="recapTableFoot" class="bg-slate-950/60 font-bold border-t border-slate-800 master-only hidden">
-              <!-- Rendered via JS -->
-            </tfoot>
           </table>
         </div>
       </section>
@@ -570,13 +571,15 @@
       let weeklyRecords = [];
 
       const SAMPLE_ENTRIES = [
-        { id: '2026-11-02', date: '2026-11-02', panel: 207059208, doc: 206630988, motionUp: 205166557, motionDown: 0, motionEwallet: 1414402, withdraw: 0 },
-        { id: '2026-11-03', date: '2026-11-03', panel: 96754629, doc: 96744629, motionUp: 96264257, motionDown: 0, motionEwallet: 285425, withdraw: 19944000 },
-        { id: '2026-11-04', date: '2026-11-04', panel: 79192808, doc: 79192808, motionUp: 49667682, motionDown: 29473437, motionEwallet: 760636, withdraw: 4780000 },
-        { id: '2026-11-05', date: '2026-11-05', panel: 166904772, doc: 166227040, motionUp: 89568054, motionDown: 74807606, motionEwallet: 1861380, withdraw: 10311000 },
-        { id: '2026-11-06', date: '2026-11-06', panel: 96726740, doc: 96651826, motionUp: 56501711, motionDown: 39366361, motionEwallet: 1461486, withdraw: 19600000 },
-        { id: '2026-11-07', date: '2026-11-07', panel: 30561611, doc: 30561611, motionUp: 19679435, motionDown: 10926695, motionEwallet: 30395, withdraw: 35194000 },
-        { id: '2026-11-08', date: '2026-11-08', panel: 0, doc: 0, motionUp: 0, motionDown: 0, motionEwallet: 0, withdraw: 0 }
+        { id: '2026-11-02', date: '2026-11-02', panel: 527435824, doc: 526711470, motionUp: 525211820, motionDown: 0, motionEwallet: 1499650, withdraw: 162651000 },
+        { id: '2026-11-03', date: '2026-11-03', panel: 95589552, doc: 95445263, motionUp: 95187744, motionDown: 0, motionEwallet: 257519, withdraw: 75950000 },
+        { id: '2026-11-04', date: '2026-11-04', panel: 73521323, doc: 73521323, motionUp: 52277740, motionDown: 20914631, motionEwallet: 836874, withdraw: 129254000 },
+        { id: '2026-11-05', date: '2026-11-05', panel: 275011733, doc: 275011733, motionUp: 189472435, motionDown: 84662976, motionEwallet: 936673, withdraw: 274506000 },
+        { id: '2026-11-06', date: '2026-11-06', panel: 173269755, doc: 173269755, motionUp: 127075777, motionDown: 45761190, motionEwallet: 733158, withdraw: 163649000 },
+        { id: '2026-11-07', date: '2026-11-07', panel: 127167177, doc: 127167177, motionUp: 93497351, motionDown: 32606354, motionEwallet: 1063472, withdraw: 84318000 },
+        { id: '2026-11-08', date: '2026-11-08', panel: 156812553, doc: 156812553, motionUp: 113999054, motionDown: 42707076, motionEwallet: 106423, withdraw: 81501000 },
+        { id: '2026-11-09', date: '2026-11-09', panel: 0, doc: 0, motionUp: 0, motionDown: 0, motionEwallet: 0, withdraw: 0 },
+        { id: '2026-11-12', date: '2026-11-12', panel: 12345678, doc: 1356789632, motionUp: 1234, motionDown: 12345555, motionEwallet: 123444, withdraw: 1123456 }
       ];
 
       let siteEntriesMap = {
@@ -640,7 +643,6 @@
 
             renderSiteTabs();
             renderTable();
-            updateDynamicFeeLabels();
             if (currentRole === 'master') {
               calculateWeeklyPGA();
               renderWeeklyRecordsTable();
@@ -693,15 +695,6 @@
         const parts = dateStr.split('-');
         if (parts.length !== 3) return dateStr;
         return `${parts[2]}/${parts[1]}/${parts[0].slice(-2)}`;
-      }
-
-      function updateDynamicFeeLabels() {
-        const lblUp = document.getElementById('label-fee-up');
-        const lblDown = document.getElementById('label-fee-down');
-        const lblEw = document.getElementById('label-fee-ew');
-        if (lblUp) lblUp.textContent = `${fees.up.toFixed(2)}% → ${fees.main.toFixed(2)}%`;
-        if (lblDown) lblDown.textContent = `${fees.down.toFixed(2)}% → ${fees.main.toFixed(2)}%`;
-        if (lblEw) lblEw.textContent = `${fees.main.toFixed(2)}%`;
       }
 
       function showToast(msg, isErr = false) {
@@ -825,6 +818,7 @@
         
         const sDate = document.getElementById('filterStartDate').value;
         const eDate = document.getElementById('filterEndDate').value;
+        const isFiltered = Boolean(sDate || eDate);
 
         const filteredEntries = entries.filter(item => {
           if (!sDate && !eDate) return true;
@@ -833,28 +827,27 @@
           return item.date >= sDate && item.date <= eDate;
         });
 
+        // Hitung total pending dan sisa pada filter (jika tidak difilter nilainya 0)
+        let fPending = 0, fSisa = 0;
+        if (isFiltered) {
+          filteredEntries.forEach(item => {
+            const m = calculateRowMetrics(item);
+            fPending += m.pending;
+            fSisa += m.sisa;
+          });
+        }
+        document.getElementById('filter-total-pending').textContent = formatNum(fPending);
+        document.getElementById('filter-total-sisa').textContent = formatNum(fSisa);
+
         const tbody = document.getElementById('recapTableBody');
-        const tfoot = document.getElementById('recapTableFoot');
 
         if (filteredEntries.length === 0) {
           tbody.innerHTML = `<tr><td colspan="11" class="p-6 text-center text-slate-500 italic">Tidak ada data rekap pada rentang tanggal tersebut.</td></tr>`;
-          if (tfoot) tfoot.innerHTML = '';
           return;
         }
 
-        let sumPanel = 0, sumDoc = 0, sumPending = 0, sumUpK = 0, sumUpN = 0, sumDownK = 0, sumDownN = 0, sumEwK = 0, sumEwN = 0, sumTotalNett = 0, sumWd = 0, sumSisa = 0;
-
         tbody.innerHTML = filteredEntries.map(item => {
           const m = calculateRowMetrics(item);
-          sumPanel += m.panel;
-          sumDoc += m.doc;
-          sumPending += m.pending;
-          sumUpK += m.upKotor; sumUpN += m.upNett;
-          sumDownK += m.downKotor; sumDownN += m.downNett;
-          sumEwK += m.ewKotor; sumEwN += m.ewNett;
-          sumTotalNett += m.totalMotionNett;
-          sumWd += m.withdraw;
-          sumSisa += m.sisa;
 
           return `
             <tr class="hover:bg-slate-900/50 transition-colors">
@@ -868,17 +861,17 @@
               <td class="p-3 font-bold ${m.pending !== 0 ? 'text-amber-400' : 'text-slate-400'}">${formatNum(m.pending)}</td>
               <td class="p-3">
                 <div class="text-slate-300">${formatNum(m.upKotor)}</div>
-                <div class="text-emerald-400 font-bold master-only ${currentRole === 'master' ? '' : 'hidden'}">${formatNum(m.upNett)}</div>
+                <div class="text-emerald-400 font-bold">${formatNum(m.upNett)}</div>
               </td>
               <td class="p-3">
                 <div class="text-slate-300">${formatNum(m.downKotor)}</div>
-                <div class="text-teal-400 font-bold master-only ${currentRole === 'master' ? '' : 'hidden'}">${formatNum(m.downNett)}</div>
+                <div class="text-teal-400 font-bold">${formatNum(m.downNett)}</div>
               </td>
               <td class="p-3">
                 <div class="text-slate-300">${formatNum(m.ewKotor)}</div>
-                <div class="text-purple-400 font-bold master-only ${currentRole === 'master' ? '' : 'hidden'}">${formatNum(m.ewNett)}</div>
+                <div class="text-purple-400 font-bold">${formatNum(m.ewNett)}</div>
               </td>
-              <td class="p-3 master-only ${currentRole === 'master' ? '' : 'hidden'} font-bold text-emerald-400 text-sm">${formatNum(m.totalMotionNett)}</td>
+              <td class="p-3 font-bold text-emerald-400 text-sm">${formatNum(m.totalMotionNett)}</td>
               <td class="p-3 font-bold text-rose-400">${formatNum(m.withdraw)}</td>
               <td class="p-3 font-bold ${m.sisa !== 0 ? 'text-cyan-400' : 'text-slate-400'}">${formatNum(m.sisa)}</td>
               <td class="p-3 text-right space-x-2 whitespace-nowrap">
@@ -888,29 +881,6 @@
             </tr>
           `;
         }).join('');
-
-        if (tfoot) {
-          if (currentRole === 'master') {
-            tfoot.classList.remove('hidden');
-            tfoot.innerHTML = `
-              <tr>
-                <td class="p-3 text-white">TOTAL (${filteredEntries.length} HARI)</td>
-                <td class="p-3 text-indigo-300">${formatNum(sumPanel)}</td>
-                <td class="p-3 text-amber-300">${formatNum(sumDoc)}</td>
-                <td class="p-3 text-amber-400">${formatNum(sumPending)}</td>
-                <td class="p-3"><span class="text-slate-300">${formatNum(sumUpK)}</span><br><span class="text-emerald-400">${formatNum(sumUpN)}</span></td>
-                <td class="p-3"><span class="text-slate-300">${formatNum(sumDownK)}</span><br><span class="text-teal-400">${formatNum(sumDownN)}</span></td>
-                <td class="p-3"><span class="text-slate-300">${formatNum(sumEwK)}</span><br><span class="text-purple-400">${formatNum(sumEwN)}</span></td>
-                <td class="p-3 text-emerald-400 text-sm">${formatNum(sumTotalNett)}</td>
-                <td class="p-3 text-rose-400">${formatNum(sumWd)}</td>
-                <td class="p-3 text-cyan-400">${formatNum(sumSisa)}</td>
-                <td class="p-3"></td>
-              </tr>
-            `;
-          } else {
-            tfoot.classList.add('hidden');
-          }
-        }
       }
 
       window.inlineUpdateField = function(dateStr, field, val) {
@@ -980,7 +950,6 @@
         document.getElementById('weekly-card-motion-nett').textContent = formatNum(totalNett);
 
         const qrisInput = parseNum(document.getElementById('pga-total-input').value);
-        // Rumus Baru: Total Bersih Motion - Total WD - Saldo QRIS Mingguan = Selisih
         const selisih = totalNett - totalWd - qrisInput;
         document.getElementById('weekly-card-selisih').textContent = formatNum(selisih);
 
@@ -1098,7 +1067,6 @@
 
         renderSiteTabs();
         renderTable();
-        updateDynamicFeeLabels();
 
         if (isMaster) {
           const todayStr = new Date().toISOString().split('T')[0];
@@ -1112,7 +1080,6 @@
       document.addEventListener('DOMContentLoaded', function() {
         initFirebase();
 
-        // Default tanggal input harian ke hari ini
         const todayStr = new Date().toISOString().split('T')[0];
         document.getElementById('inputDateDirect').value = todayStr;
 
@@ -1215,7 +1182,6 @@
             closeFeeModal();
             renderSiteTabs();
             renderTable();
-            updateDynamicFeeLabels();
             if (currentRole === 'master') calculateWeeklyPGA();
           });
         });
@@ -1320,7 +1286,6 @@
           saveToCloud(() => {
             renderTable();
             if (currentRole === 'master') calculateWeeklyPGA();
-            // Kosongkan form input dan kembalikan tanggal ke hari ini setelah simpan
             clearEditor();
             const tDay = new Date().toISOString().split('T')[0];
             document.getElementById('inputDateDirect').value = tDay;
