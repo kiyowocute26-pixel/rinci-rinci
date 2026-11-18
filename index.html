@@ -309,8 +309,8 @@
           </div>
         </section>
 
-        <!-- DASHBOARD REKAP MINGGUAN & SALDO QRIS (TOKO) - HANYA MUNCUL DI AKUN MASTER -->
-        <section class="master-only hidden bg-slate-900 border border-slate-800 rounded-2xl shadow-lg p-5 space-y-6">
+        <!-- DASHBOARD REKAP MINGGUAN & SALDO QRIS (KHUSUS MASTER) -->
+        <section class="master-only bg-slate-900 border border-slate-800 rounded-2xl shadow-lg p-5 space-y-6 hidden">
           <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-slate-800">
             <div>
               <h2 class="text-base font-bold text-white flex items-center gap-2">
@@ -355,7 +355,7 @@
             </div>
           </div>
 
-          <!-- Tabel Rincian Kategori Fee -->
+          <!-- Tabel Rincian Kategori Fee Sesuai Screenshot -->
           <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3">
             <div class="flex items-center justify-between text-xs text-slate-400">
               <span id="feeTablePeriodLabel" class="font-bold text-slate-300">PERIODE: -</span>
@@ -461,7 +461,7 @@
           <!-- Tabel Rincian Atas (QRIS, AKRN, Admin Fee, Cashout, Total) -->
           <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
             
-            <!-- Kolom QRIS -->
+            <!-- Kolom QRIS (Otomatis dari Seluruh Toko) -->
             <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                 <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">QRIS (SEMUA TOKO)</span>
@@ -475,7 +475,7 @@
               </div>
             </div>
 
-            <!-- Kolom AKRN -->
+            <!-- Kolom AKRN (Input Manual Rincian) -->
             <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                 <span class="text-xs font-bold text-teal-400 uppercase tracking-wider">AKRN</span>
@@ -490,7 +490,7 @@
               </div>
             </div>
 
-            <!-- Kolom ADMIN FEE -->
+            <!-- Kolom ADMIN FEE (Input Manual) -->
             <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                 <span class="text-xs font-bold text-rose-400 uppercase tracking-wider">ADMIN FEE</span>
@@ -505,7 +505,7 @@
               </div>
             </div>
 
-            <!-- Kolom CASHOUT -->
+            <!-- Kolom CASHOUT (Input Manual) -->
             <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                 <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">CASHOUT</span>
@@ -520,7 +520,7 @@
               </div>
             </div>
 
-            <!-- Kolom TOTAL -->
+            <!-- Kolom TOTAL (QRIS - AKRN - Admin Fee - Cashout) -->
             <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                 <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">TOTAL (HASIL)</span>
@@ -617,7 +617,7 @@
     </div>
   </div>
 
-  <!-- MODAL MASTER & PENGATURAN KREDENSIAL & FEE -->
+  <!-- ================= MODAL MASTER & PENGATURAN KREDENSIAL & FEE ================= -->
   <div id="feeModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
     <div class="w-full max-w-xl bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-6 space-y-6 max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
@@ -641,4 +641,1111 @@
                 class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white text-sm font-bold focus:outline-none focus:border-amber-500">
             </div>
             <div>
-              <label class="block text-[11px] text-slate-4
+              <label class="block text-[11px] text-slate-400 mb-1">100K DOWN (Fee 1)</label>
+              <input type="number" step="0.01" id="setting-fee-down" required
+                class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white text-sm font-bold focus:outline-none focus:border-amber-500">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Main Fee (Fee 2)</label>
+              <input type="number" step="0.01" id="setting-fee-main" required
+                class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white text-sm font-bold focus:outline-none focus:border-amber-500">
+            </div>
+          </div>
+        </div>
+
+        <!-- Pengaturan Kredensial Login (Bisa Diubah di Sini) -->
+        <div class="space-y-3 pt-2 border-t border-slate-800">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400">Ubah Akun Login (Admin & Master)</h4>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Username Admin</label>
+              <input type="text" id="setting-admin-user" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Password Admin</label>
+              <input type="text" id="setting-admin-pass" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Username Master</label>
+              <input type="text" id="setting-master-user" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Password Master</label>
+              <input type="text" id="setting-master-pass" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500">
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-2">
+          <button type="button" id="btnCloseFeeModal2" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">Batal</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold shadow-lg shadow-amber-600/30">Simpan Pengaturan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 border border-slate-700 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-sm">
+    <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+    <span id="toast-msg">Berhasil disimpan</span>
+  </div>
+
+  <!-- Modal Konfirmasi -->
+  <div id="confirmModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="w-full max-w-sm bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-6 space-y-4 text-center">
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 mb-1">
+        <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+      </div>
+      <h3 id="confirmTitle" class="font-bold text-white text-base">Konfirmasi</h3>
+      <p id="confirmDesc" class="text-xs text-slate-400">Apakah Anda yakin ingin melanjutkan tindakan ini?</p>
+      <div class="flex items-center justify-center gap-3 pt-2">
+        <button id="confirmBtnCancel" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">Batal</button>
+        <button id="confirmBtnYes" class="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold">Ya, Lanjutkan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script Logika Real-Time Cloud Sync -->
+  <script>
+    (function() {
+      const STORAGE_KEY_SESSION = 'rinci_session_v1';
+
+      let currentRole = null;
+      let activeSiteIndex = 0;
+      let siteNames = ['JTG', 'ATG', 'DTG', 'VTG'];
+      let fees = { up: 0.80, down: 0.55, main: 1.50 };
+      let credentials = { adminUser: 'admin', adminPass: 'admin123', masterUser: 'master', masterPass: 'master123' };
+      
+      let storeWeeklyInputs = {};
+      let masterAkrnRows = [{ name: 'JAGO', amount: 0 }, { name: 'ASLI', amount: 0 }, { name: 'DAMRI', amount: 0 }, { name: 'VARIO', amount: 0 }];
+      let masterAdminFeeRows = [{ name: 'Fee 1', amount: 0 }];
+      let masterCashoutRows = [{ name: 'Cashout 1', amount: 0 }];
+      let masterRecords = [];
+
+      const SAMPLE_ENTRIES = [
+        { id: '2026-11-02', date: '2026-11-02', panel: 527435824, doc: 526711470, motionUp: 525211820, motionDown: 0, motionEwallet: 1499650, withdraw: 162651000 },
+        { id: '2026-11-03', date: '2026-11-03', panel: 95589552, doc: 95445263, motionUp: 95187744, motionDown: 0, motionEwallet: 257519, withdraw: 75950000 },
+        { id: '2026-11-04', date: '2026-11-04', panel: 73521323, doc: 73521323, motionUp: 52277740, motionDown: 20914631, motionEwallet: 836874, withdraw: 129254000 },
+        { id: '2026-11-05', date: '2026-11-05', panel: 275011733, doc: 275011733, motionUp: 189472435, motionDown: 84662976, motionEwallet: 936673, withdraw: 274506000 },
+        { id: '2026-11-06', date: '2026-11-06', panel: 173269755, doc: 173269755, motionUp: 127075777, motionDown: 45761190, motionEwallet: 733158, withdraw: 163649000 },
+        { id: '2026-11-07', date: '2026-11-07', panel: 127167177, doc: 127167177, motionUp: 93497351, motionDown: 32606354, motionEwallet: 1063472, withdraw: 84318000 },
+        { id: '2026-11-08', date: '2026-11-08', panel: 156812553, doc: 156812553, motionUp: 113999054, motionDown: 42707076, motionEwallet: 106423, withdraw: 81501000 },
+        { id: '2026-11-09', date: '2026-11-09', panel: 0, doc: 0, motionUp: 0, motionDown: 0, motionEwallet: 0, withdraw: 0 }
+      ];
+
+      let siteEntriesMap = {
+        0: JSON.parse(JSON.stringify(SAMPLE_ENTRIES)),
+        1: JSON.parse(JSON.stringify(SAMPLE_ENTRIES)),
+        2: JSON.parse(JSON.stringify(SAMPLE_ENTRIES)),
+        3: JSON.parse(JSON.stringify(SAMPLE_ENTRIES))
+      };
+
+      let db = null;
+      let unsubscribeFirestore = null;
+
+      function initFirebase() {
+        const fbCfg = {
+          apiKey: "AIzaSyB9iWMbLqoyk40wuRIvg86_xKZhXzOrGHg",
+          authDomain: "rincirinci-a4312.firebaseapp.com",
+          projectId: "rincirinci-a4312",
+          storageBucket: "rincirinci-a4312.firebasestorage.app",
+          messagingSenderId: "227111828553",
+          appId: "1:227111828553:web:27b0b3c4ed84eadf491398",
+          measurementId: "G-NYQ04Q9BCS"
+        };
+
+        try {
+          if (firebase.apps.length === 0) {
+            firebase.initializeApp(fbCfg);
+          }
+          db = firebase.firestore();
+          updateCloudIndicator('live');
+          setupFirestoreSync();
+        } catch(e) {
+          console.error("Firebase Init Error:", e);
+          updateCloudIndicator('error');
+        }
+      }
+
+      function updateCloudIndicator(status) {
+        const ind = document.getElementById('cloudSyncIndicator');
+        if (!ind) return;
+        if (status === 'live') {
+          ind.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1';
+          ind.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span> Cloud Live';
+        } else {
+          ind.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center gap-1';
+          ind.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-rose-400 inline-block"></span> Sync Error';
+        }
+      }
+
+      function setupFirestoreSync() {
+        if (!db) return;
+        if (unsubscribeFirestore) unsubscribeFirestore();
+
+        unsubscribeFirestore = db.collection("rinci_data").doc("main_state").onSnapshot((doc) => {
+          if (doc.exists) {
+            const data = doc.data();
+            if (data.siteEntriesMap) siteEntriesMap = data.siteEntriesMap;
+            if (data.fees) fees = data.fees;
+            if (data.siteNames) siteNames = data.siteNames;
+            if (data.credentials) credentials = data.credentials;
+            if (data.storeWeeklyInputs) storeWeeklyInputs = data.storeWeeklyInputs;
+            if (data.masterAkrnRows) masterAkrnRows = data.masterAkrnRows;
+            if (data.masterAdminFeeRows) masterAdminFeeRows = data.masterAdminFeeRows;
+            if (data.masterCashoutRows) masterCashoutRows = data.masterCashoutRows;
+            if (data.masterRecords) masterRecords = data.masterRecords;
+
+            renderSiteTabs();
+            if (activeSiteIndex === 'global') {
+              if (currentRole === 'master') renderGlobalMasterDashboard();
+            } else {
+              renderTable();
+              renderStoreWeeklyDashboard();
+            }
+          }
+        }, (err) => {
+          console.error("Firestore sync error:", err);
+          updateCloudIndicator('error');
+        });
+      }
+
+      function saveToCloud(onSuccess) {
+        if (!db) {
+          showToast('Database belum terhubung!', true);
+          return;
+        }
+        db.collection("rinci_data").doc("main_state").set({
+          siteEntriesMap,
+          fees,
+          siteNames,
+          credentials,
+          storeWeeklyInputs,
+          masterAkrnRows,
+          masterAdminFeeRows,
+          masterCashoutRows,
+          masterRecords,
+          updatedAt: Date.now()
+        }, { merge: true }).then(() => {
+          showToast('Data berhasil disimpan ke Cloud!');
+          if (onSuccess) onSuccess();
+        }).catch(err => {
+          console.error("Cloud save error:", err);
+          showToast('Gagal ke Cloud: ' + err.message, true);
+        });
+      }
+
+      function getEntries() {
+        if (activeSiteIndex === 'global') return [];
+        return siteEntriesMap[activeSiteIndex] || [];
+      }
+
+      function formatNum(val) {
+        if (isNaN(val) || val === null || val === undefined || val === '') return '0';
+        return Math.round(Number(val)).toLocaleString('id-ID');
+      }
+
+      function parseNum(str) {
+        if (str === null || str === undefined || str === '') return 0;
+        const clean = String(str).replace(/\./g, '').replace(/[^0-9-]+/g, '');
+        return Number(clean) || 0;
+      }
+
+      function formatDateID(dateStr) {
+        if (!dateStr) return '';
+        const parts = dateStr.split('-');
+        if (parts.length !== 3) return dateStr;
+        return `${parts[2]}/${parts[1]}/${parts[0].slice(-2)}`;
+      }
+
+      function showToast(msg, isErr = false) {
+        const t = document.getElementById('toast');
+        const icon = document.getElementById('toast-icon');
+        const text = document.getElementById('toast-msg');
+        text.textContent = msg;
+        icon.className = isErr ? 'fa-solid fa-circle-exclamation text-rose-400 text-base' : 'fa-solid fa-circle-check text-emerald-400 text-base';
+        t.classList.remove('translate-y-20', 'opacity-0');
+        setTimeout(() => {
+          t.classList.add('translate-y-20', 'opacity-0');
+        }, 3000);
+      }
+
+      function showConfirm(title, desc, onYes) {
+        const m = document.getElementById('confirmModal');
+        document.getElementById('confirmTitle').textContent = title;
+        document.getElementById('confirmDesc').textContent = desc;
+        m.classList.remove('hidden'); m.classList.add('flex');
+
+        const btnYes = document.getElementById('confirmBtnYes');
+        const btnCancel = document.getElementById('confirmBtnCancel');
+
+        const clean = () => {
+          m.classList.add('hidden'); m.classList.remove('flex');
+          btnYes.replaceWith(btnYes.cloneNode(true));
+          btnCancel.replaceWith(btnCancel.cloneNode(true));
+        };
+
+        document.getElementById('confirmBtnYes').addEventListener('click', () => { clean(); onYes(); });
+        document.getElementById('confirmBtnCancel').addEventListener('click', clean);
+      }
+
+      function calculateRowMetrics(item) {
+        const panel = Number(item.panel) || 0;
+        const doc = Number(item.doc) || 0;
+        const pending = panel - doc;
+
+        const upKotor = Number(item.motionUp) || 0;
+        const upFee1 = upKotor * (fees.up / 100);
+        const upSisa1 = upKotor - upFee1;
+        const upFee2 = upSisa1 * (fees.main / 100);
+        const upNett = upSisa1 - upFee2;
+
+        const downKotor = Number(item.motionDown) || 0;
+        const downFee1 = downKotor * (fees.down / 100);
+        const downSisa1 = downKotor - downFee1;
+        const downFee2 = downSisa1 * (fees.main / 100);
+        const downNett = downSisa1 - downFee2;
+
+        const ewKotor = Number(item.motionEwallet) || 0;
+        const ewFee = ewKotor * (fees.main / 100);
+        const ewNett = ewKotor - ewFee;
+
+        const totalMotionKotor = upKotor + downKotor + ewKotor;
+        const totalMotionNett = upNett + downNett + ewNett;
+        const sisa = doc - totalMotionKotor;
+        const withdraw = Number(item.withdraw) || 0;
+
+        return {
+          panel, doc, pending,
+          upKotor, upFee1: upKotor * (fees.up / 100), upFee2, upNett,
+          downKotor, downFee1: downKotor * (fees.down / 100), downFee2, downNett,
+          ewKotor, ewFee, ewNett,
+          totalMotionKotor, totalMotionNett,
+          withdraw, sisa
+        };
+      }
+
+      function renderSiteTabs() {
+        const container = document.getElementById('siteTabsContainer');
+        let html = siteNames.map((name, idx) => `
+          <button type="button" onclick="window.switchSite(${idx})" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${activeSiteIndex === idx ? 'bg-indigo-600 text-white shadow' : 'text-slate-400 hover:text-white hover:bg-slate-900'}">
+            ${name}
+          </button>
+        `).join('');
+
+        html += `
+          <button type="button" onclick="window.switchSite('global')" class="master-only ${currentRole === 'master' ? '' : 'hidden'} px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${activeSiteIndex === 'global' ? 'bg-amber-600 text-white shadow' : 'text-amber-400 hover:text-white hover:bg-slate-900'}">
+            <i class="fa-solid fa-globe mr-1"></i> GLOBAL
+          </button>
+        `;
+
+        html += `
+          <button type="button" onclick="window.openAddStoreModal()" class="master-only ${currentRole === 'master' ? '' : 'hidden'} px-2.5 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white hover:bg-slate-900" title="Tambah Toko Baru">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        `;
+
+        container.innerHTML = html;
+      }
+
+      window.switchSite = function(idx) {
+        activeSiteIndex = idx;
+        renderSiteTabs();
+
+        const storeContainer = document.getElementById('storeViewContainer');
+        const globalContainer = document.getElementById('globalViewContainer');
+
+        if (idx === 'global') {
+          storeContainer.classList.add('hidden');
+          globalContainer.classList.remove('hidden');
+          if (currentRole === 'master') renderGlobalMasterDashboard();
+        } else {
+          storeContainer.classList.remove('hidden');
+          globalContainer.classList.add('hidden');
+          document.getElementById('activeStoreNameTitle').textContent = siteNames[idx];
+          document.getElementById('weeklyStoreTitle').textContent = siteNames[idx];
+          renderTable();
+          renderStoreWeeklyDashboard();
+        }
+      };
+
+      window.openAddStoreModal = function() {
+        document.getElementById('newStoreNameInput').value = '';
+        const m = document.getElementById('addStoreModal');
+        m.classList.remove('hidden'); m.classList.add('flex');
+      };
+
+      function updateLivePreview() {
+        const panel = parseNum(document.getElementById('input-panel').value);
+        const doc = parseNum(document.getElementById('input-doc').value);
+        const pending = panel - doc;
+
+        const upK = parseNum(document.getElementById('input-motion-up').value);
+        const upS1 = upK - (upK * (fees.up / 100));
+        const upN = upS1 - (upS1 * (fees.main / 100));
+
+        const downK = parseNum(document.getElementById('input-motion-down').value);
+        const downS1 = downK - (downK * (fees.down / 100));
+        const downN = downS1 - (downS1 * (fees.main / 100));
+
+        const ewK = parseNum(document.getElementById('input-motion-ewallet').value);
+        const ewN = ewK - (ewK * (fees.main / 100));
+
+        const totalNett = upN + downN + ewN;
+        const totalKotor = upK + downK + ewK;
+        const sisa = doc - totalKotor;
+
+        document.getElementById('live-pending').textContent = formatNum(pending);
+        document.getElementById('live-sisa').textContent = formatNum(sisa);
+        document.getElementById('live-total-bersih').textContent = formatNum(totalNett);
+
+        document.getElementById('preview-up-nett').textContent = formatNum(upN);
+        document.getElementById('preview-down-nett').textContent = formatNum(downN);
+        document.getElementById('preview-ew-nett').textContent = formatNum(ewN);
+      }
+
+      function renderTable() {
+        if (activeSiteIndex === 'global') return;
+        const entries = getEntries();
+        entries.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        const sDate = document.getElementById('filterStartDate').value;
+        const eDate = document.getElementById('filterEndDate').value;
+
+        const filteredEntries = entries.filter(item => {
+          if (!sDate && !eDate) return true;
+          if (sDate && !eDate) return item.date >= sDate;
+          if (!sDate && eDate) return item.date <= eDate;
+          return item.date >= sDate && item.date <= eDate;
+        });
+
+        // Hitung Total Pending & Sisa Permanen (Berdasarkan Data Terfilter/Semua)
+        let totPending = 0, totSisa = 0;
+        filteredEntries.forEach(item => {
+          const m = calculateRowMetrics(item);
+          totPending += m.pending;
+          totSisa += m.sisa;
+        });
+        document.getElementById('filter-total-pending').textContent = formatNum(totPending);
+        document.getElementById('filter-total-sisa').textContent = formatNum(totSisa);
+
+        const tbody = document.getElementById('recapTableBody');
+        if (filteredEntries.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="11" class="p-6 text-center text-slate-500 italic">Tidak ada data rekap pada rentang tanggal tersebut.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = filteredEntries.map(item => {
+          const m = calculateRowMetrics(item);
+          return `
+            <tr class="hover:bg-slate-900/50 transition-colors">
+              <td class="p-3 font-bold text-white whitespace-nowrap">${formatDateID(item.date)}</td>
+              <td class="p-3 font-semibold text-indigo-300">
+                <input type="text" value="${m.panel ? formatNum(m.panel) : ''}" onchange="window.inlineUpdateField('${item.date}', 'panel', this.value)" class="w-28 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-xs text-white font-semibold">
+              </td>
+              <td class="p-3 font-semibold text-amber-300">
+                <span>${m.doc ? formatNum(m.doc) : '0'}</span>
+              </td>
+              <td class="p-3 font-bold ${m.pending !== 0 ? 'text-amber-400' : 'text-slate-400'}">${formatNum(m.pending)}</td>
+              <td class="p-3">
+                <div class="text-slate-300">${formatNum(m.upKotor)}</div>
+                <div class="text-emerald-400 font-bold">${formatNum(m.upNett)}</div>
+              </td>
+              <td class="p-3">
+                <div class="text-slate-300">${formatNum(m.downKotor)}</div>
+                <div class="text-teal-400 font-bold">${formatNum(m.downNett)}</div>
+              </td>
+              <td class="p-3">
+                <div class="text-slate-300">${formatNum(m.ewKotor)}</div>
+                <div class="text-purple-400 font-bold">${formatNum(m.ewNett)}</div>
+              </td>
+              <td class="p-3 font-bold text-emerald-400 text-sm">${formatNum(m.totalMotionNett)}</td>
+              <td class="p-3 font-bold text-rose-400">${formatNum(m.withdraw)}</td>
+              <td class="p-3 font-bold ${m.sisa !== 0 ? 'text-cyan-400' : 'text-slate-400'}">${formatNum(m.sisa)}</td>
+              <td class="p-3 text-right space-x-2 whitespace-nowrap">
+                <button onclick="window.selectRowForEdit('${item.date}')" class="px-2.5 py-1 rounded bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 font-semibold">Edit</button>
+                <button onclick="window.deleteEntry('${item.date}')" class="master-only ${currentRole === 'master' ? '' : 'hidden'} px-2.5 py-1 rounded bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 font-semibold">Hapus</button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      window.inlineUpdateField = function(dateStr, field, val) {
+        const entries = getEntries();
+        const entry = entries.find(e => e.date === dateStr);
+        if (entry) {
+          entry[field] = parseNum(val);
+          saveToCloud(() => {
+            renderTable();
+            renderStoreWeeklyDashboard();
+          });
+        }
+      };
+
+      window.selectRowForEdit = function(dateStr) {
+        document.getElementById('inputDateDirect').value = dateStr;
+        const entries = getEntries();
+        const entry = entries.find(e => e.date === dateStr);
+        if (!entry) return;
+
+        document.getElementById('input-panel').value = entry.panel ? formatNum(entry.panel) : '';
+        document.getElementById('input-doc').value = entry.doc ? formatNum(entry.doc) : '';
+        document.getElementById('input-motion-up').value = entry.motionUp ? formatNum(entry.motionUp) : '';
+        document.getElementById('input-motion-down').value = entry.motionDown ? formatNum(entry.motionDown) : '';
+        document.getElementById('input-motion-ewallet').value = entry.motionEwallet ? formatNum(entry.motionEwallet) : '';
+        document.getElementById('input-withdraw').value = entry.withdraw ? formatNum(entry.withdraw) : '';
+
+        updateLivePreview();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        showToast('Memuat data tanggal ' + formatDateID(dateStr) + ' ke form');
+      };
+
+      window.deleteEntry = function(dateStr) {
+        showConfirm('Hapus Data', 'Hapus rekap untuk tanggal ' + formatDateID(dateStr) + '?', () => {
+          siteEntriesMap[activeSiteIndex] = getEntries().filter(e => e.date !== dateStr);
+          saveToCloud(() => {
+            renderTable();
+            renderStoreWeeklyDashboard();
+          });
+        });
+      };
+
+      function renderStoreWeeklyDashboard() {
+        if (activeSiteIndex === 'global' || currentRole !== 'master') return;
+        const start = document.getElementById('store-weekly-start').value;
+        const end = document.getElementById('store-weekly-end').value;
+
+        const entries = getEntries();
+        const filtered = entries.filter(e => {
+          if (!start || !end) return true;
+          return e.date >= start && e.date <= end;
+        });
+
+        let upK = 0, up150 = 0, up080 = 0, upNett = 0;
+        let downK = 0, down150 = 0, down055 = 0, downNett = 0;
+        let ewK = 0, ew150 = 0, ewNett = 0;
+        let totalWd = 0;
+
+        filtered.forEach(item => {
+          const m = calculateRowMetrics(item);
+          upK += m.upKotor; up150 += m.upFee1; up080 += m.upFee2; upNett += m.upNett;
+          downK += m.downKotor; down150 += m.downFee1; down055 += m.downFee2; downNett += m.downNett;
+          ewK += m.ewKotor; ew150 += m.ewFee; ewNett += m.ewNett;
+          totalWd += m.withdraw;
+        });
+
+        const totalNett = upNett + downNett + ewNett;
+        const totKotor = upK + downK + ewK;
+        const tot150 = up150 + down150 + ew150;
+        const tot055 = down055;
+        const tot080 = up080;
+
+        document.getElementById('store-card-motion').textContent = formatNum(totalNett);
+
+        // Update Tabel Rincian Fee Sesuai Screenshot
+        document.getElementById('feeTablePeriodLabel').textContent = `PERIODE: ${start ? formatDateID(start) : '-'} S/D ${end ? formatDateID(end) : '-'}`;
+        document.getElementById('fee-up-kotor').textContent = formatNum(upK);
+        document.getElementById('fee-up-150').textContent = formatNum(up150);
+        document.getElementById('fee-up-080').textContent = formatNum(up080);
+        document.getElementById('fee-up-nett').textContent = formatNum(upNett);
+
+        document.getElementById('fee-down-kotor').textContent = formatNum(downK);
+        document.getElementById('fee-down-150').textContent = formatNum(down150);
+        document.getElementById('fee-down-055').textContent = formatNum(down055);
+        document.getElementById('fee-down-nett').textContent = formatNum(downNett);
+
+        document.getElementById('fee-ew-kotor').textContent = formatNum(ewK);
+        document.getElementById('fee-ew-150').textContent = formatNum(ew150);
+        document.getElementById('fee-ew-nett').textContent = formatNum(ewNett);
+
+        document.getElementById('fee-tot-kotor').textContent = formatNum(totKotor);
+        document.getElementById('fee-tot-150').textContent = formatNum(tot150);
+        document.getElementById('fee-tot-055').textContent = formatNum(tot055);
+        document.getElementById('fee-tot-080').textContent = formatNum(tot080);
+        document.getElementById('fee-tot-nett').textContent = formatNum(totalNett);
+
+        if (!storeWeeklyInputs[activeSiteIndex]) storeWeeklyInputs[activeSiteIndex] = { qris: 0, records: [] };
+        const qrisInput = Number(storeWeeklyInputs[activeSiteIndex].qris) || 0;
+        
+        // RUMUS BENAR: Total Bersih Motion - Total WD - Saldo QRIS = Selisih Akhir
+        const selisih = totalNett - totalWd - qrisInput;
+        document.getElementById('store-card-selisih').textContent = formatNum(selisih);
+
+        const statusEl = document.getElementById('store-selisih-status');
+        if (!qrisInput && qrisInput !== 0) {
+          statusEl.textContent = 'ISI';
+          statusEl.className = 'text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-800 text-slate-300';
+        } else if (selisih === 0) {
+          statusEl.textContent = 'COCOK';
+          statusEl.className = 'text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+        } else {
+          statusEl.textContent = 'SELISIH';
+          statusEl.className = 'text-[10px] font-bold px-2 py-0.5 rounded-md bg-rose-500/20 text-rose-300 border border-rose-500/30';
+        }
+
+        renderStoreWeeklyRecords();
+      }
+
+      function renderStoreWeeklyRecords() {
+        if (currentRole !== 'master') return;
+        const tbody = document.getElementById('storeWeeklyRecordsTableBody');
+        if (!tbody) return;
+        const data = storeWeeklyInputs[activeSiteIndex]?.records || [];
+        if (data.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-500 italic">Belum ada arsip pertinggal mingguan toko ini.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = data.map((item, idx) => `
+          <tr class="hover:bg-slate-900/40">
+            <td class="p-3 font-bold text-indigo-300">${formatDateID(item.start)} s/d ${formatDateID(item.end)}</td>
+            <td class="p-3 text-emerald-400 font-semibold">${formatNum(item.totalNett)}</td>
+            <td class="p-3 text-rose-400 font-semibold">${formatNum(item.totalWd)}</td>
+            <td class="p-3 text-amber-300 font-semibold">${formatNum(item.qrisInput)}</td>
+            <td class="p-3 font-bold ${item.selisih === 0 ? 'text-emerald-400' : 'text-rose-400'}">${formatNum(item.selisih)}</td>
+            <td class="p-3 text-right text-slate-400 text-[11px]">${item.savedAt || '-'}</td>
+          </tr>
+        `).join('');
+      }
+
+      window.addAkrnRow = function() {
+        masterAkrnRows.push({ name: 'AKRN Baru', amount: 0 });
+        renderGlobalMasterDashboard();
+      };
+      window.removeAkrnRow = function(idx) {
+        masterAkrnRows.splice(idx, 1);
+        renderGlobalMasterDashboard();
+      };
+
+      window.addAdminFeeRow = function() {
+        masterAdminFeeRows.push({ name: 'Fee Baru', amount: 0 });
+        renderGlobalMasterDashboard();
+      };
+      window.removeAdminFeeRow = function(idx) {
+        masterAdminFeeRows.splice(idx, 1);
+        renderGlobalMasterDashboard();
+      };
+
+      window.addCashoutRow = function() {
+        masterCashoutRows.push({ name: 'Cashout Baru', amount: 0 });
+        renderGlobalMasterDashboard();
+      };
+      window.removeCashoutRow = function(idx) {
+        masterCashoutRows.splice(idx, 1);
+        renderGlobalMasterDashboard();
+      };
+
+      function renderGlobalMasterDashboard() {
+        if (currentRole !== 'master') return;
+        const start = document.getElementById('master-start-date').value;
+        const end = document.getElementById('master-end-date').value;
+
+        let qrisTotals = [];
+        siteNames.forEach((_, sIdx) => {
+          const siteEntries = siteEntriesMap[sIdx] || [];
+          const filtered = siteEntries.filter(e => {
+            if (!start || !end) return true;
+            return e.date >= start && e.date <= end;
+          });
+          let siteSum = 0;
+          filtered.forEach(item => {
+            const m = calculateRowMetrics(item);
+            siteSum += m.totalMotionNett;
+          });
+          qrisTotals.push(siteSum);
+        });
+
+        const qrisContainer = document.getElementById('master-qris-rows');
+        let totalQris = 0;
+        qrisContainer.innerHTML = siteNames.map((name, idx) => {
+          totalQris += qrisTotals[idx];
+          return `
+            <div class="flex items-center justify-between bg-slate-900 p-2 rounded-lg">
+              <span class="text-slate-300 font-semibold">${name}</span>
+              <span class="font-bold text-cyan-400">${formatNum(qrisTotals[idx])}</span>
+            </div>
+          `;
+        }).join('');
+        document.getElementById('master-qris-total').textContent = formatNum(totalQris);
+
+        const akrnContainer = document.getElementById('master-akrn-rows');
+        let totalAkrn = 0;
+        akrnContainer.innerHTML = masterAkrnRows.map((item, idx) => {
+          totalAkrn += Number(item.amount) || 0;
+          return `
+            <div class="flex items-center gap-2 bg-slate-900 p-1.5 rounded-lg">
+              <input type="text" value="${item.name}" onchange="window.updateMasterField('akrn', ${idx}, 'name', this.value)" class="w-20 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-white">
+              <input type="text" value="${item.amount ? formatNum(item.amount) : ''}" placeholder="0" onchange="window.updateMasterField('akrn', ${idx}, 'amount', this.value)" class="w-24 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-teal-400 font-bold text-right">
+              <button onclick="window.removeAkrnRow(${idx})" class="text-rose-400 hover:text-rose-300 px-1"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+          `;
+        }).join('');
+        document.getElementById('master-akrn-total').textContent = formatNum(totalAkrn);
+
+        const adminFeeContainer = document.getElementById('master-adminfee-rows');
+        let totalAdminFee = 0;
+        adminFeeContainer.innerHTML = masterAdminFeeRows.map((item, idx) => {
+          totalAdminFee += Number(item.amount) || 0;
+          return `
+            <div class="flex items-center gap-2 bg-slate-900 p-1.5 rounded-lg">
+              <input type="text" value="${item.name}" onchange="window.updateMasterField('adminfee', ${idx}, 'name', this.value)" class="w-20 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-white">
+              <input type="text" value="${item.amount ? formatNum(item.amount) : ''}" placeholder="0" onchange="window.updateMasterField('adminfee', ${idx}, 'amount', this.value)" class="w-24 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-rose-400 font-bold text-right">
+              <button onclick="window.removeAdminFeeRow(${idx})" class="text-rose-400 hover:text-rose-300 px-1"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+          `;
+        }).join('');
+        document.getElementById('master-adminfee-total').textContent = formatNum(totalAdminFee);
+
+        const cashoutContainer = document.getElementById('master-cashout-rows');
+        let totalCashout = 0;
+        cashoutContainer.innerHTML = masterCashoutRows.map((item, idx) => {
+          totalCashout += Number(item.amount) || 0;
+          return `
+            <div class="flex items-center gap-2 bg-slate-900 p-1.5 rounded-lg">
+              <input type="text" value="${item.name}" onchange="window.updateMasterField('cashout', ${idx}, 'name', this.value)" class="w-20 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-white">
+              <input type="text" value="${item.amount ? formatNum(item.amount) : ''}" placeholder="0" onchange="window.updateMasterField('cashout', ${idx}, 'amount', this.value)" class="w-24 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-indigo-400 font-bold text-right">
+              <button onclick="window.removeCashoutRow(${idx})" class="text-rose-400 hover:text-rose-300 px-1"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+          `;
+        }).join('');
+        document.getElementById('master-cashout-total').textContent = formatNum(totalCashout);
+
+        const totalRowsContainer = document.getElementById('master-total-rows');
+        let grandTotalHasil = 0;
+        totalRowsContainer.innerHTML = siteNames.map((name, idx) => {
+          const qVal = qrisTotals[idx];
+          const pShare = totalQris > 0 ? (qVal / totalQris) : (1 / siteNames.length);
+          const siteAkrn = totalAkrn * pShare;
+          const siteFee = totalAdminFee * pShare;
+          const siteCashout = totalCashout * pShare;
+          const siteHasil = qVal - siteAkrn - siteFee - siteCashout;
+          grandTotalHasil += siteHasil;
+
+          return `
+            <div class="flex items-center justify-between bg-slate-900 p-2 rounded-lg">
+              <span class="text-slate-300 font-semibold">${name}</span>
+              <span class="font-bold text-emerald-400">${formatNum(siteHasil)}</span>
+            </div>
+          `;
+        }).join('');
+        document.getElementById('master-total-all').textContent = formatNum(grandTotalHasil);
+
+        const finalHasil = totalQris - totalAkrn - totalAdminFee - totalCashout;
+        document.getElementById('summary-all-qris').textContent = formatNum(totalQris);
+        document.getElementById('summary-all-akrn').textContent = formatNum(totalAkrn);
+        document.getElementById('summary-all-adminfee').textContent = formatNum(totalAdminFee);
+        document.getElementById('summary-all-cashout').textContent = formatNum(totalCashout);
+        document.getElementById('summary-all-hasil').textContent = formatNum(finalHasil);
+
+        renderMasterRecordsTable();
+      }
+
+      window.updateMasterField = function(type, idx, field, val) {
+        if (type === 'akrn') {
+          masterAkrnRows[idx][field] = field === 'amount' ? parseNum(val) : val;
+        } else if (type === 'adminfee') {
+          masterAdminFeeRows[idx][field] = field === 'amount' ? parseNum(val) : val;
+        } else if (type === 'cashout') {
+          masterCashoutRows[idx][field] = field === 'amount' ? parseNum(val) : val;
+        }
+        saveToCloud(() => renderGlobalMasterDashboard());
+      };
+
+      function renderMasterRecordsTable() {
+        const tbody = document.getElementById('masterRecordsTableBody');
+        if (!tbody) return;
+        if (!masterRecords || masterRecords.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-500 italic">Belum ada arsip global master.</td></tr>`;
+          return;
+        }
+        tbody.innerHTML = masterRecords.map(item => `
+          <tr class="hover:bg-slate-900/40">
+            <td class="p-3 font-bold text-indigo-300">${formatDateID(item.start)} s/d ${formatDateID(item.end)}</td>
+            <td class="p-3 text-cyan-400 font-semibold">${formatNum(item.totalQris)}</td>
+            <td class="p-3 text-teal-400 font-semibold">${formatNum(item.totalAkrn)}</td>
+            <td class="p-3 text-rose-400 font-semibold">${formatNum(item.totalAdminFee)}</td>
+            <td class="p-3 text-indigo-400 font-semibold">${formatNum(item.totalCashout)}</td>
+            <td class="p-3 text-right text-emerald-400 font-bold">${formatNum(item.hasil)}</td>
+          </tr>
+        `).join('');
+      }
+
+      function applyRole(role) {
+        currentRole = role;
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('appWrapper').classList.remove('hidden');
+
+        const isMaster = role === 'master';
+        document.querySelectorAll('.master-only').forEach(el => {
+          if (isMaster) el.classList.remove('hidden'); else el.classList.add('hidden');
+        });
+
+        const badge = document.getElementById('active-account-badge');
+        const roleInd = document.getElementById('role-badge-indicator');
+        const btnAdminPass = document.getElementById('btn-admin-change-pass');
+
+        if (isMaster) {
+          if (btnAdminPass) btnAdminPass.classList.add('hidden');
+          badge.className = 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/20 border border-amber-400/40 text-xs font-bold text-amber-300';
+          badge.innerHTML = '<i class="fa-solid fa-crown"></i><span>Master</span>';
+          roleInd.textContent = 'MODE MASTER';
+          roleInd.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30';
+        } else {
+          if (btnAdminPass) btnAdminPass.classList.remove('hidden');
+          badge.className = 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold text-slate-200';
+          badge.innerHTML = '<i class="fa-solid fa-user"></i><span>Admin</span>';
+          roleInd.textContent = 'MODE ADMIN';
+          roleInd.className = 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30';
+        }
+
+        renderSiteTabs();
+        switchSite(0);
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        initFirebase();
+
+        const todayStr = new Date().toISOString().split('T')[0];
+        document.getElementById('inputDateDirect').value = todayStr;
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const user = (document.getElementById('login-username').value || '').trim();
+          const pass = (document.getElementById('login-password').value || '').trim();
+          const errEl = document.getElementById('login-error-msg');
+
+          const adminU = credentials?.adminUser || 'admin';
+          const adminP = credentials?.adminPass || 'admin123';
+          const masterU = credentials?.masterUser || 'master';
+          const masterP = credentials?.masterPass || 'master123';
+
+          let matched = null;
+          if (user.toLowerCase() === masterU.toLowerCase() && pass === masterP) {
+            matched = 'master';
+          } else if (user.toLowerCase() === adminU.toLowerCase() && pass === adminP) {
+            matched = 'admin';
+          }
+
+          if (!matched) {
+            errEl.classList.remove('hidden');
+            return;
+          }
+          errEl.classList.add('hidden');
+          sessionStorage.setItem(STORAGE_KEY_SESSION, matched);
+          applyRole(matched);
+        });
+
+        document.getElementById('toggleLoginPassBtn').addEventListener('click', function(e) {
+          e.preventDefault();
+          const inp = document.getElementById('login-password');
+          const icon = document.getElementById('login-eye-icon');
+          if (inp.type === 'password') { 
+            inp.type = 'text'; 
+            icon.className = 'fa-solid fa-eye-slash text-xs text-indigo-400'; 
+          } else { 
+            inp.type = 'password'; 
+            icon.className = 'fa-solid fa-eye text-xs'; 
+          }
+        });
+
+        document.getElementById('btnLogout').addEventListener('click', function() {
+          currentRole = null;
+          sessionStorage.removeItem(STORAGE_KEY_SESSION);
+          document.getElementById('appWrapper').classList.add('hidden');
+          document.getElementById('loginScreen').classList.remove('hidden');
+          document.getElementById('login-username').value = '';
+          document.getElementById('login-password').value = '';
+        });
+
+        document.getElementById('btnOpenFeeModal').addEventListener('click', function() {
+          document.getElementById('setting-fee-up').value = fees.up;
+          document.getElementById('setting-fee-down').value = fees.down;
+          document.getElementById('setting-fee-main').value = fees.main;
+
+          document.getElementById('setting-admin-user').value = credentials.adminUser || 'admin';
+          document.getElementById('setting-admin-pass').value = credentials.adminPass || 'admin123';
+          document.getElementById('setting-master-user').value = credentials.masterUser || 'master';
+          document.getElementById('setting-master-pass').value = credentials.masterPass || 'master123';
+
+          const m = document.getElementById('feeModal');
+          m.classList.remove('hidden'); m.classList.add('flex');
+        });
+
+        const closeFeeModal = () => { document.getElementById('feeModal').classList.add('hidden'); document.getElementById('feeModal').classList.remove('flex'); };
+        document.getElementById('btnCloseFeeModal').addEventListener('click', closeFeeModal);
+        document.getElementById('btnCloseFeeModal2').addEventListener('click', closeFeeModal);
+
+        const closeAddStore = () => { document.getElementById('addStoreModal').classList.add('hidden'); document.getElementById('addStoreModal').classList.remove('flex'); };
+        document.getElementById('btnCloseAddStore').addEventListener('click', closeAddStore);
+        document.getElementById('btnCloseAddStore2').addEventListener('click', closeAddStore);
+
+        document.getElementById('btnSubmitAddStore').addEventListener('click', function() {
+          const name = document.getElementById('newStoreNameInput').value.trim().toUpperCase();
+          if (!name) {
+            showToast('Nama toko tidak boleh kosong!', true);
+            return;
+          }
+          if (siteNames.includes(name)) {
+            showToast('Nama toko sudah ada!', true);
+            return;
+          }
+
+          siteNames.push(name);
+          const newIdx = siteNames.length - 1;
+          siteEntriesMap[newIdx] = [];
+
+          saveToCloud(() => {
+            closeAddStore();
+            switchSite(newIdx);
+            showToast('Toko ' + name + ' berhasil ditambahkan!');
+          });
+        });
+
+        document.getElementById('feeForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          fees.up = Number(document.getElementById('setting-fee-up').value) || 0;
+          fees.down = Number(document.getElementById('setting-fee-down').value) || 0;
+          fees.main = Number(document.getElementById('setting-fee-main').value) || 0;
+
+          credentials.adminUser = document.getElementById('setting-admin-user').value.trim() || 'admin';
+          credentials.adminPass = document.getElementById('setting-admin-pass').value.trim() || 'admin123';
+          credentials.masterUser = document.getElementById('setting-master-user').value.trim() || 'master';
+          credentials.masterPass = document.getElementById('setting-master-pass').value.trim() || 'master123';
+
+          saveToCloud(() => {
+            closeFeeModal();
+            renderSiteTabs();
+            renderTable();
+            showToast('Pengaturan akun & fee berhasil disimpan!');
+          });
+        });
+
+        document.getElementById('btnResetToToday').addEventListener('click', function() {
+          const tDay = new Date().toISOString().split('T')[0];
+          document.getElementById('inputDateDirect').value = tDay;
+          loadEntryToEditor(tDay);
+        });
+
+        document.getElementById('inputDateDirect').addEventListener('change', function() {
+          loadEntryToEditor(this.value);
+        });
+
+        function loadEntryToEditor(dateStr) {
+          const entries = getEntries();
+          const entry = entries.find(e => e.date === dateStr);
+          if (entry) {
+            document.getElementById('input-panel').value = entry.panel ? formatNum(entry.panel) : '';
+            document.getElementById('input-doc').value = entry.doc ? formatNum(entry.doc) : '';
+            document.getElementById('input-motion-up').value = entry.motionUp ? formatNum(entry.motionUp) : '';
+            document.getElementById('input-motion-down').value = entry.motionDown ? formatNum(entry.motionDown) : '';
+            document.getElementById('input-motion-ewallet').value = entry.motionEwallet ? formatNum(entry.motionEwallet) : '';
+            document.getElementById('input-withdraw').value = entry.withdraw ? formatNum(entry.withdraw) : '';
+          } else {
+            clearEditor();
+          }
+          updateLivePreview();
+        }
+
+        function clearEditor() {
+          document.getElementById('input-panel').value = '';
+          document.getElementById('input-doc').value = '';
+          document.getElementById('input-motion-up').value = '';
+          document.getElementById('input-motion-down').value = '';
+          document.getElementById('input-motion-ewallet').value = '';
+          document.getElementById('input-withdraw').value = '';
+          document.getElementById('live-pending').textContent = '0';
+          document.getElementById('live-sisa').textContent = '0';
+          document.getElementById('live-total-bersih').textContent = '0';
+        }
+
+        document.getElementById('btnResetSample').addEventListener('click', function() {
+          showConfirm('Reset Data', 'Kembalikan data ke contoh awal?', () => {
+            siteEntriesMap[activeSiteIndex] = JSON.parse(JSON.stringify(SAMPLE_ENTRIES));
+            saveToCloud(() => {
+              renderTable();
+              renderStoreWeeklyDashboard();
+              showToast('Data direset');
+            });
+          });
+        });
+
+        document.getElementById('btnExportCSV').addEventListener('click', function() {
+          const entries = getEntries();
+          let csv = 'Tanggal,Panel,DOC,Pending,100K UP,100K DOWN,E-WALLET,Total Bersih,Withdraw,Sisa\r\n';
+          entries.forEach(item => {
+            const m = calculateRowMetrics(item);
+            csv += `${item.date},${m.panel},${m.doc},${m.pending},${Math.round(m.upNett)},${Math.round(m.downNett)},${Math.round(m.ewNett)},${Math.round(m.totalMotionNett)},${m.withdraw},${m.sisa}\r\n`;
+          });
+          const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `rekon_${siteNames[activeSiteIndex].toLowerCase()}.csv`;
+          a.click();
+          showToast('File CSV berhasil diunduh');
+        });
+
+        ['input-panel', 'input-doc', 'input-motion-up', 'input-motion-down', 'input-motion-ewallet', 'input-withdraw'].forEach(id => {
+          const el = document.getElementById(id);
+          el.addEventListener('input', updateLivePreview);
+          el.addEventListener('blur', function() {
+            const val = parseNum(this.value);
+            this.value = val !== 0 ? formatNum(val) : '';
+            updateLivePreview();
+          });
+        });
+
+        document.getElementById('dailyForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const targetDate = document.getElementById('inputDateDirect').value;
+          if (!targetDate) {
+            showToast('Pilih tanggal terlebih dahulu!', true);
+            return;
+          }
+
+          const entries = getEntries();
+          let entry = entries.find(e => e.date === targetDate);
+          if (!entry) {
+            entry = { id: targetDate, date: targetDate };
+            entries.push(entry);
+          }
+
+          entry.panel = parseNum(document.getElementById('input-panel').value);
+          entry.doc = parseNum(document.getElementById('input-doc').value);
+          entry.motionUp = parseNum(document.getElementById('input-motion-up').value);
+          entry.motionDown = parseNum(document.getElementById('input-motion-down').value);
+          entry.motionEwallet = parseNum(document.getElementById('input-motion-ewallet').value);
+          entry.withdraw = parseNum(document.getElementById('input-withdraw').value);
+
+          saveToCloud(() => {
+            renderTable();
+            renderStoreWeeklyDashboard();
+            clearEditor();
+            const tDay = new Date().toISOString().split('T')[0];
+            document.getElementById('inputDateDirect').value = tDay;
+            showToast('Data harian berhasil disimpan & form dibersihkan');
+          });
+        });
+
+        document.getElementById('btnApplyFilter').addEventListener('click', renderTable);
+        document.getElementById('btnClearFilter').addEventListener('click', function() {
+          document.getElementById('filterStartDate').value = '';
+          document.getElementById('filterEndDate').value = '';
+          renderTable();
+          showToast('Filter direset');
+        });
+
+        document.getElementById('store-qris-input').addEventListener('input', function() {
+          if (!storeWeeklyInputs[activeSiteIndex]) storeWeeklyInputs[activeSiteIndex] = { qris: 0, records: [] };
+          storeWeeklyInputs[activeSiteIndex].qris = parseNum(this.value);
+          renderStoreWeeklyDashboard();
+        });
+        document.getElementById('store-qris-input').addEventListener('blur', function() {
+          const val = parseNum(this.value);
+          this.value = val !== 0 ? formatNum(val) : '';
+          if (!storeWeeklyInputs[activeSiteIndex]) storeWeeklyInputs[activeSiteIndex] = { qris: 0, records: [] };
+          storeWeeklyInputs[activeSiteIndex].qris = val;
+          renderStoreWeeklyDashboard();
+        });
+
+        document.getElementById('store-weekly-start').addEventListener('change', renderStoreWeeklyDashboard);
+        document.getElementById('store-weekly-end').addEventListener('change', renderStoreWeeklyDashboard);
+
+        document.getElementById('btnSaveStoreWeeklyRecord').addEventListener('click', function() {
+          const start = document.getElementById('store-weekly-start').value;
+          const end = document.getElementById('store-weekly-end').value;
+          if (!start || !end) {
+            showToast('Tentukan rentang tanggal periode mingguan toko!', true);
+            return;
+          }
+
+          const entries = getEntries();
+          const filtered = entries.filter(e => e.date >= start && e.date <= end);
+          let totalNett = 0, totalWd = 0;
+          filtered.forEach(item => {
+            const m = calculateRowMetrics(item);
+            totalNett += m.totalMotionNett;
+            totalWd += m.withdraw;
+          });
+
+          const qrisInput = storeWeeklyInputs[activeSiteIndex]?.qris || 0;
+          const selisih = totalNett - totalWd - qrisInput;
+          const savedAt = new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' + new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+          if (!storeWeeklyInputs[activeSiteIndex]) storeWeeklyInputs[activeSiteIndex] = { qris: 0, records: [] };
+          storeWeeklyInputs[activeSiteIndex].records.unshift({
+            start, end, totalNett, totalWd, qrisInput, selisih, savedAt
+          });
+
+          saveToCloud(() => {
+            renderStoreWeeklyRecords();
+            showToast('Arsip pertinggal saldo QRIS berhasil disimpan!');
+          });
+        });
+
+        document.getElementById('btnClearStoreWeeklyRecords').addEventListener('click', function() {
+          showConfirm('Hapus Arsip', 'Hapus riwayat pertinggal mingguan toko ini?', () => {
+            if (storeWeeklyInputs[activeSiteIndex]) storeWeeklyInputs[activeSiteIndex].records = [];
+            saveToCloud(() => {
+              renderStoreWeeklyRecords();
+              showToast('Riwayat dibersihkan');
+            });
+          });
+        });
+
+        document.getElementById('master-start-date').addEventListener('change', renderGlobalMasterDashboard);
+        document.getElementById('master-end-date').addEventListener('change', renderGlobalMasterDashboard);
+
+        document.getElementById('btnSaveMasterRecord').addEventListener('click', function() {
+          const start = document.getElementById('master-start-date').value;
+          const end = document.getElementById('master-end-date').value;
+          if (!start || !end) {
+            showToast('Tentukan rentang tanggal periode global master!', true);
+            return;
+          }
+
+          let totalQris = 0;
+          siteNames.forEach((_, sIdx) => {
+            const siteEntries = siteEntriesMap[sIdx] || [];
+            const filtered = siteEntries.filter(e => e.date >= start && e.date <= end);
+            filtered.forEach(item => {
+              const m = calculateRowMetrics(item);
+              totalQris += m.totalMotionNett;
+            });
+          });
+
+          let totalAkrn = masterAkrnRows.reduce((acc, r) => acc + (Number(r.amount) || 0), 0);
+          let totalAdminFee = masterAdminFeeRows.reduce((acc, r) => acc + (Number(r.amount) || 0), 0);
+          let totalCashout = masterCashoutRows.reduce((acc, r) => acc + (Number(r.amount) || 0), 0);
+          let hasil = totalQris - totalAkrn - totalAdminFee - totalCashout;
+
+          masterRecords.unshift({
+            start, end, totalQris, totalAkrn, totalAdminFee, totalCashout, hasil
+          });
+
+          saveToCloud(() => {
+            renderGlobalMasterDashboard();
+            showToast('Arsip Global Master berhasil disimpan!');
+          });
+        });
+
+        document.getElementById('btnClearMasterRecords').addEventListener('click', function() {
+          showConfirm('Hapus Arsip', 'Hapus semua riwayat arsip global master?', () => {
+            masterRecords = [];
+            saveToCloud(() => {
+              renderGlobalMasterDashboard();
+              showToast('Riwayat global dibersihkan');
+            });
+          });
+        });
+
+        const activeSess = sessionStorage.getItem(STORAGE_KEY_SESSION);
+        if (activeSess) {
+          applyRole(activeSess);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
