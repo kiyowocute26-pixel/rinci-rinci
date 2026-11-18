@@ -129,17 +129,14 @@
               <i class="fa-solid fa-pen-to-square text-indigo-400"></i>
               <span>Input Harian</span>
             </h2>
-            <p class="text-xs text-slate-400">Bisa langsung Paste nominal dari Spreadsheet (titik otomatis dibersihkan)</p>
+            <p class="text-xs text-slate-400">Pilih tanggal bebas & paste nominal dari Spreadsheet (form & tanggal otomatis bersih/hari ini setelah disimpan)</p>
           </div>
 
           <div class="flex items-center gap-2 w-full sm:w-auto">
             <label class="text-xs font-semibold text-slate-400 whitespace-nowrap">Tanggal:</label>
-            <select id="editorDateSelect" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white font-semibold focus:outline-none focus:border-indigo-500 flex-1 sm:flex-none">
-              <!-- Options -->
-            </select>
-            <button id="btnOpenAddDate" class="px-3 py-2 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/40 text-xs font-semibold text-indigo-300 transition-colors flex items-center gap-1.5" title="Tambah Tanggal Baru">
-              <i class="fa-solid fa-plus"></i>
-              <span>Tambah</span>
+            <input type="date" id="inputDateDirect" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white font-semibold focus:outline-none focus:border-indigo-500">
+            <button id="btnResetToToday" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-300 transition-colors">
+              Hari Ini
             </button>
           </div>
         </div>
@@ -171,7 +168,7 @@
             <div class="bg-slate-950 border border-slate-800/80 rounded-xl p-4 relative group">
               <div class="flex items-center justify-between mb-2">
                 <label class="text-xs font-bold uppercase tracking-wider text-emerald-400">100K UP</label>
-                <span class="text-[10px] text-slate-400 master-only hidden">0.80% → 1.50%</span>
+                <span id="label-fee-up" class="text-[10px] text-slate-400 master-only hidden">0.80% → 1.50%</span>
               </div>
               <input type="text" id="input-motion-up" placeholder="0"
                 class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2.5 text-white font-bold text-base focus:outline-none focus:border-emerald-500">
@@ -185,7 +182,7 @@
             <div class="bg-slate-950 border border-slate-800/80 rounded-xl p-4 relative group">
               <div class="flex items-center justify-between mb-2">
                 <label class="text-xs font-bold uppercase tracking-wider text-teal-400">100K DOWN</label>
-                <span class="text-[10px] text-slate-400 master-only hidden">0.55% → 1.50%</span>
+                <span id="label-fee-down" class="text-[10px] text-slate-400 master-only hidden">0.55% → 1.50%</span>
               </div>
               <input type="text" id="input-motion-down" placeholder="0"
                 class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2.5 text-white font-bold text-base focus:outline-none focus:border-teal-500">
@@ -202,7 +199,7 @@
             <div class="bg-slate-950 border border-slate-800/80 rounded-xl p-4">
               <div class="flex items-center justify-between mb-2">
                 <label class="text-xs font-bold uppercase tracking-wider text-purple-400">E-WALLET</label>
-                <span class="text-[10px] text-slate-400 master-only hidden">1.50%</span>
+                <span id="label-fee-ew" class="text-[10px] text-slate-400 master-only hidden">1.50%</span>
               </div>
               <input type="text" id="input-motion-ewallet" placeholder="0"
                 class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2.5 text-white font-bold text-base focus:outline-none focus:border-purple-500">
@@ -254,7 +251,7 @@
 
       <!-- TABEL REKAP PER HARI -->
       <section class="bg-slate-900 border border-slate-800 rounded-2xl shadow-lg overflow-hidden">
-        <div class="p-4 sm:p-5 border-b border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div class="p-4 sm:p-5 border-b border-slate-800 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3">
           <div>
             <h2 class="text-base font-bold text-white flex items-center gap-2">
               <i class="fa-solid fa-table-list text-indigo-400"></i>
@@ -263,14 +260,21 @@
             <p class="text-xs text-slate-400">Daftar rekonsiliasi harian situs aktif</p>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button id="btnExportCSV" class="master-only px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-200 transition-colors flex items-center gap-1.5 hidden">
+          <!-- Filter Rentang Tanggal -->
+          <div class="flex flex-wrap items-center gap-2 w-full lg:w-auto">
+            <span class="text-xs text-slate-400">Dari:</span>
+            <input type="date" id="filterStartDate" class="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-white font-semibold focus:outline-none focus:border-indigo-500">
+            <span class="text-xs text-slate-400">s/d:</span>
+            <input type="date" id="filterEndDate" class="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-white font-semibold focus:outline-none focus:border-indigo-500">
+            <button id="btnApplyFilter" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl text-xs">Filter</button>
+            <button id="btnClearFilter" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl text-xs">Reset</button>
+            <button id="btnExportCSV" class="master-only px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-200 transition-colors flex items-center gap-1.5 hidden">
               <i class="fa-solid fa-download text-indigo-400"></i>
               <span>Export CSV</span>
             </button>
-            <button id="btnResetSample" class="master-only px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-amber-400 transition-colors flex items-center gap-1.5 hidden">
+            <button id="btnResetSample" class="master-only px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-amber-400 transition-colors flex items-center gap-1.5 hidden">
               <i class="fa-solid fa-rotate-right"></i>
-              <span>Reset Contoh</span>
+              <span>Reset</span>
             </button>
           </div>
         </div>
@@ -286,7 +290,7 @@
                 <th class="p-3 font-semibold">100K UP (KOTOR / NETT)</th>
                 <th class="p-3 font-semibold">100K DOWN (KOTOR / NETT)</th>
                 <th class="p-3 font-semibold">E-WALLET (KOTOR / NETT)</th>
-                <th class="p-3 font-semibold master-only hidden">TOTAL BERSIH</th>
+                <th class="p-3 font-semibold master-only hidden">TOTAL</th>
                 <th class="p-3 font-semibold">WITHDRAW</th>
                 <th class="p-3 font-semibold">SISA</th>
                 <th class="p-3 font-semibold text-right">AKSI</th>
@@ -302,15 +306,15 @@
         </div>
       </section>
 
-      <!-- DASHBOARD REKAP MINGGUAN & CEK PGA (KHUSUS MASTER) -->
+      <!-- DASHBOARD REKAP MINGGUAN & SALDO QRIS (KHUSUS MASTER) -->
       <section class="master-only hidden bg-slate-900 border border-slate-800 rounded-2xl shadow-lg p-5 space-y-5">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-slate-800">
           <div>
             <h2 class="text-base font-bold text-white flex items-center gap-2">
               <i class="fa-solid fa-chart-pie text-amber-400"></i>
-              <span>Dashboard Rekap Mingguan & Cek PGA</span>
+              <span>Dashboard Rekap Mingguan & Saldo QRIS</span>
             </h2>
-            <p class="text-xs text-slate-400">Ringkasan otomatis dan pencocokan total PGA mingguan</p>
+            <p class="text-xs text-slate-400">Ringkasan mingguan, pencocokan saldo QRIS, dan simpan arsip pertinggal</p>
           </div>
 
           <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
@@ -322,31 +326,39 @@
         </div>
 
         <!-- Kartu Ringkasan Atas -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
           <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
-            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">TOTAL MOTION BERSIH (OTOMATIS)</span>
-            <span id="weekly-card-motion-nett" class="text-xl font-bold text-emerald-400">0</span>
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">TOTAL BERSIH MOTION</span>
+            <span id="weekly-card-motion-nett" class="text-lg font-bold text-emerald-400">0</span>
           </div>
           <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
-            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">SELISIH (BERSIH - PGA)</span>
-            <span id="weekly-card-selisih" class="text-xl font-bold text-cyan-400">0</span>
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">SELISIH AKHIR</span>
+            <span id="weekly-card-selisih" class="text-lg font-bold text-cyan-400">0</span>
           </div>
           <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
             <div class="flex items-center justify-between mb-1">
-              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">STATUS & PGA</span>
-              <span id="weekly-card-status" class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-800 text-slate-300">ISI TOTAL PGA</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">SALDO QRIS MINGGUAN</span>
+              <span id="weekly-card-status" class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-800 text-slate-300">ISI SALDO</span>
             </div>
             <div class="relative">
-              <input type="text" id="pga-total-input" placeholder="Masukkan Total PGA"
-                class="w-full bg-slate-900 border border-amber-500/50 rounded-xl px-3 py-2 text-white font-bold text-sm focus:outline-none focus:border-amber-400 text-right pr-4">
+              <input type="text" id="pga-total-input" placeholder="Masukkan Saldo QRIS"
+                class="w-full bg-slate-900 border border-amber-500/50 rounded-xl px-3 py-2 text-white font-bold text-sm focus:outline-none focus:border-amber-400 text-right pr-2">
             </div>
+          </div>
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-2">SIMPAN PERTINGGAL</span>
+            <button id="btnSaveWeeklyPgaRecord" class="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs shadow-md shadow-amber-600/30 transition-all flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-bookmark"></i>
+              <span>Simpan Saldo Minggu Ini</span>
+            </button>
           </div>
         </div>
 
-        <!-- Tabel Rincian Mingguan -->
+        <!-- Tabel Rincian Mingguan Formula -->
         <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden">
-          <div class="p-3 bg-slate-900/80 border-b border-slate-800 text-center font-bold text-xs text-amber-300 tracking-wider uppercase" id="weekly-range-title">
-            PERIODE MINGGUAN
+          <div class="p-3 bg-slate-900/80 border-b border-slate-800 flex items-center justify-between text-xs text-amber-300">
+            <span class="font-bold tracking-wider uppercase" id="weekly-range-title">PERIODE MINGGUAN</span>
+            <span class="text-slate-400 italic">Rumus: Total Bersih Motion - Total WD - Saldo QRIS = Selisih</span>
           </div>
           <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse text-xs">
@@ -366,6 +378,31 @@
               <tfoot id="weeklyTableFoot" class="bg-slate-900/80 font-bold border-t border-slate-800">
                 <!-- Rendered via JS -->
               </tfoot>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tabel Riwayat Pertinggal Saldo QRIS Mingguan -->
+        <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden mt-4">
+          <div class="p-3 bg-slate-900/80 border-b border-slate-800 flex items-center justify-between text-xs font-bold text-indigo-300">
+            <span>RIWAYAT PERTINGGAL SALDO QRIS MINGGUAN (ARSIP CLOUD)</span>
+            <button id="btnClearWeeklyRecords" class="text-[10px] text-rose-400 hover:text-rose-300">Hapus Riwayat</button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-slate-900/40 text-slate-400 uppercase border-b border-slate-800">
+                  <th class="p-3 font-semibold">PERIODE</th>
+                  <th class="p-3 font-semibold">TOTAL BERSIH MOTION</th>
+                  <th class="p-3 font-semibold">TOTAL WD</th>
+                  <th class="p-3 font-semibold">SALDO QRIS</th>
+                  <th class="p-3 font-semibold">SELISIH</th>
+                  <th class="p-3 font-semibold text-right">WAKTU SIMPAN</th>
+                </tr>
+              </thead>
+              <tbody id="weeklyRecordsTableBody" class="divide-y divide-slate-800/50 font-medium text-slate-300">
+                <!-- Rendered via JS -->
+              </tbody>
             </table>
           </div>
         </div>
@@ -491,47 +528,9 @@
           </div>
         </div>
 
-        <!-- Riwayat Pergantian Sandi Admin -->
-        <div class="space-y-2 pt-2 border-t border-slate-800">
-          <div class="flex items-center justify-between">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Riwayat Admin Ganti Sandi</h4>
-            <button type="button" id="btnClearPassLogs" class="text-[10px] text-rose-400 hover:text-rose-300 font-semibold">Bersihkan Riwayat</button>
-          </div>
-          <div id="admin-pass-log-list" class="bg-slate-950 border border-slate-800 rounded-xl p-3 max-h-32 overflow-y-auto text-xs space-y-1.5">
-            <!-- Logs -->
-          </div>
-        </div>
-
         <div class="flex items-center justify-end gap-3 pt-2">
           <button type="button" id="btnCloseFeeModal2" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">Batal</button>
           <button type="submit" class="px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold shadow-lg shadow-amber-600/30">Simpan Pengaturan</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- ================= MODAL TAMBAH TANGGAL ================= -->
-  <div id="addDateModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="w-full max-w-sm bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-6 space-y-5">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-        <h3 class="font-bold text-white text-base flex items-center gap-2">
-          <i class="fa-solid fa-calendar-plus text-indigo-400"></i>
-          <span>Tambah Tanggal Rekap</span>
-        </h3>
-        <button id="btnCloseAddDate" class="text-slate-400 hover:text-white">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-
-      <form id="addDateForm" class="space-y-4">
-        <div>
-          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Pilih Tanggal</label>
-          <input type="date" id="new-date-input" required
-            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500">
-        </div>
-        <div class="flex items-center justify-end gap-3 pt-2">
-          <button type="button" id="btnCloseAddDate2" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">Batal</button>
-          <button type="submit" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-lg shadow-indigo-600/30">Tambah</button>
         </div>
       </form>
     </div>
@@ -565,19 +564,19 @@
 
       let currentRole = null;
       let activeSiteIndex = 0;
-      let siteNames = ['SITUS 1', 'SITUS 2', 'SITUS 3', 'SITUS 4'];
+      let siteNames = ['JTG', 'ATG', 'DTG', 'VTG'];
       let fees = { up: 0.80, down: 0.55, main: 1.50 };
       let credentials = { adminUser: 'admin', adminPass: 'admin123', masterUser: 'master', masterPass: 'master123' };
-      let passLogs = [];
+      let weeklyRecords = [];
 
       const SAMPLE_ENTRIES = [
-        { id: '2026-11-02', date: '2026-11-02', panel: 527435824, doc: 628711470, motionUp: 526211820, motionDown: 0, motionEwallet: 1488860, withdraw: 0 },
-        { id: '2026-11-03', date: '2026-11-03', panel: 86588562, doc: 86445283, motionUp: 86187744, motionDown: 0, motionEwallet: 267518, withdraw: 0 },
-        { id: '2026-11-04', date: '2026-11-04', panel: 73521323, doc: 73521323, motionUp: 52277740, motionDown: 20814831, motionEwallet: 838874, withdraw: 507822 },
-        { id: '2026-11-06', date: '2026-11-06', panel: 275011733, doc: 275011733, motionUp: 138472435, motionDown: 84882878, motionEwallet: 838873, withdraw: 80361 },
-        { id: '2026-11-08', date: '2026-11-08', panel: 173288755, doc: 173288755, motionUp: 127075777, motionDown: 45781180, motionEwallet: 733168, withdraw: 300370 },
-        { id: '2026-11-07', date: '2026-11-07', panel: 127187177, doc: 127187177, motionUp: 83487351, motionDown: 32808354, motionEwallet: 1083472, withdraw: 0 },
-        { id: '2026-11-09', date: '2026-11-09', panel: 168812563, doc: 168812563, motionUp: 113888064, motionDown: 42707078, motionEwallet: 108423, withdraw: 0 }
+        { id: '2026-11-02', date: '2026-11-02', panel: 207059208, doc: 206630988, motionUp: 205166557, motionDown: 0, motionEwallet: 1414402, withdraw: 0 },
+        { id: '2026-11-03', date: '2026-11-03', panel: 96754629, doc: 96744629, motionUp: 96264257, motionDown: 0, motionEwallet: 285425, withdraw: 19944000 },
+        { id: '2026-11-04', date: '2026-11-04', panel: 79192808, doc: 79192808, motionUp: 49667682, motionDown: 29473437, motionEwallet: 760636, withdraw: 4780000 },
+        { id: '2026-11-05', date: '2026-11-05', panel: 166904772, doc: 166227040, motionUp: 89568054, motionDown: 74807606, motionEwallet: 1861380, withdraw: 10311000 },
+        { id: '2026-11-06', date: '2026-11-06', panel: 96726740, doc: 96651826, motionUp: 56501711, motionDown: 39366361, motionEwallet: 1461486, withdraw: 19600000 },
+        { id: '2026-11-07', date: '2026-11-07', panel: 30561611, doc: 30561611, motionUp: 19679435, motionDown: 10926695, motionEwallet: 30395, withdraw: 35194000 },
+        { id: '2026-11-08', date: '2026-11-08', panel: 0, doc: 0, motionUp: 0, motionDown: 0, motionEwallet: 0, withdraw: 0 }
       ];
 
       let siteEntriesMap = {
@@ -587,7 +586,6 @@
         3: JSON.parse(JSON.stringify(SAMPLE_ENTRIES))
       };
 
-      let currentEditingDate = '';
       let db = null;
       let unsubscribeFirestore = null;
 
@@ -638,11 +636,15 @@
             if (data.fees) fees = data.fees;
             if (data.siteNames) siteNames = data.siteNames;
             if (data.credentials) credentials = data.credentials;
-            if (data.passLogs) passLogs = data.passLogs;
+            if (data.weeklyRecords) weeklyRecords = data.weeklyRecords;
 
             renderSiteTabs();
             renderTable();
-            if (currentRole === 'master') calculateWeeklyPGA();
+            updateDynamicFeeLabels();
+            if (currentRole === 'master') {
+              calculateWeeklyPGA();
+              renderWeeklyRecordsTable();
+            }
           }
         }, (err) => {
           console.error("Firestore sync error:", err);
@@ -660,7 +662,7 @@
           fees,
           siteNames,
           credentials,
-          passLogs,
+          weeklyRecords,
           updatedAt: Date.now()
         }, { merge: true }).then(() => {
           showToast('Data berhasil disimpan ke Cloud!');
@@ -680,11 +682,26 @@
         return Math.round(Number(val)).toLocaleString('id-ID');
       }
 
-      // PERBAIKAN UTAMA: Membersihkan semua titik pemisah ribuan dari hasil copy-paste spreadsheet
       function parseNum(str) {
         if (str === null || str === undefined || str === '') return 0;
         const clean = String(str).replace(/\./g, '').replace(/[^0-9-]+/g, '');
         return Number(clean) || 0;
+      }
+
+      function formatDateID(dateStr) {
+        if (!dateStr) return '';
+        const parts = dateStr.split('-');
+        if (parts.length !== 3) return dateStr;
+        return `${parts[2]}/${parts[1]}/${parts[0].slice(-2)}`;
+      }
+
+      function updateDynamicFeeLabels() {
+        const lblUp = document.getElementById('label-fee-up');
+        const lblDown = document.getElementById('label-fee-down');
+        const lblEw = document.getElementById('label-fee-ew');
+        if (lblUp) lblUp.textContent = `${fees.up.toFixed(2)}% → ${fees.main.toFixed(2)}%`;
+        if (lblDown) lblDown.textContent = `${fees.down.toFixed(2)}% → ${fees.main.toFixed(2)}%`;
+        if (lblEw) lblEw.textContent = `${fees.main.toFixed(2)}%`;
       }
 
       function showToast(msg, isErr = false) {
@@ -766,56 +783,12 @@
       window.switchSite = function(idx) {
         activeSiteIndex = idx;
         renderSiteTabs();
-        populateDateSelectors();
         renderTable();
-        if (currentRole === 'master') calculateWeeklyPGA();
-      };
-
-      function populateDateSelectors() {
-        const entries = getEntries();
-        entries.sort((a, b) => new Date(b.date) - new Date(a.date));
-        const select = document.getElementById('editorDateSelect');
-        select.innerHTML = entries.map(e => `<option value="${e.date}">${e.date}</option>`).join('');
-
-        if (entries.length > 0) {
-          if (!currentEditingDate || !entries.some(e => e.date === currentEditingDate)) {
-            currentEditingDate = entries[0].date;
-          }
-          select.value = currentEditingDate;
-          loadEntryToEditor(currentEditingDate);
-        } else {
-          currentEditingDate = '';
-          clearEditor();
+        if (currentRole === 'master') {
+          calculateWeeklyPGA();
+          renderWeeklyRecordsTable();
         }
-      }
-
-      function clearEditor() {
-        document.getElementById('input-panel').value = '';
-        document.getElementById('input-doc').value = '';
-        document.getElementById('input-motion-up').value = '';
-        document.getElementById('input-motion-down').value = '';
-        document.getElementById('input-motion-ewallet').value = '';
-        document.getElementById('input-withdraw').value = '';
-        document.getElementById('live-pending').textContent = '0';
-        document.getElementById('live-sisa').textContent = '0';
-        document.getElementById('live-total-bersih').textContent = '0';
-      }
-
-      function loadEntryToEditor(dateStr) {
-        currentEditingDate = dateStr;
-        const entries = getEntries();
-        const entry = entries.find(e => e.date === dateStr);
-        if (!entry) return;
-
-        document.getElementById('input-panel').value = (entry.panel !== undefined && entry.panel !== 0) ? formatNum(entry.panel) : '';
-        document.getElementById('input-doc').value = (entry.doc !== undefined && entry.doc !== 0) ? formatNum(entry.doc) : '';
-        document.getElementById('input-motion-up').value = (entry.motionUp !== undefined && entry.motionUp !== 0) ? formatNum(entry.motionUp) : '';
-        document.getElementById('input-motion-down').value = (entry.motionDown !== undefined && entry.motionDown !== 0) ? formatNum(entry.motionDown) : '';
-        document.getElementById('input-motion-ewallet').value = (entry.motionEwallet !== undefined && entry.motionEwallet !== 0) ? formatNum(entry.motionEwallet) : '';
-        document.getElementById('input-withdraw').value = (entry.withdraw !== undefined && entry.withdraw !== 0) ? formatNum(entry.withdraw) : '';
-
-        updateLivePreview();
-      }
+      };
 
       function updateLivePreview() {
         const panel = parseNum(document.getElementById('input-panel').value);
@@ -849,18 +822,29 @@
       function renderTable() {
         const entries = getEntries();
         entries.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        const sDate = document.getElementById('filterStartDate').value;
+        const eDate = document.getElementById('filterEndDate').value;
+
+        const filteredEntries = entries.filter(item => {
+          if (!sDate && !eDate) return true;
+          if (sDate && !eDate) return item.date >= sDate;
+          if (!sDate && eDate) return item.date <= eDate;
+          return item.date >= sDate && item.date <= eDate;
+        });
+
         const tbody = document.getElementById('recapTableBody');
         const tfoot = document.getElementById('recapTableFoot');
 
-        if (entries.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="11" class="p-6 text-center text-slate-500 italic">Belum ada data rekonsiliasi.</td></tr>`;
+        if (filteredEntries.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="11" class="p-6 text-center text-slate-500 italic">Tidak ada data rekap pada rentang tanggal tersebut.</td></tr>`;
           if (tfoot) tfoot.innerHTML = '';
           return;
         }
 
         let sumPanel = 0, sumDoc = 0, sumPending = 0, sumUpK = 0, sumUpN = 0, sumDownK = 0, sumDownN = 0, sumEwK = 0, sumEwN = 0, sumTotalNett = 0, sumWd = 0, sumSisa = 0;
 
-        tbody.innerHTML = entries.map(item => {
+        tbody.innerHTML = filteredEntries.map(item => {
           const m = calculateRowMetrics(item);
           sumPanel += m.panel;
           sumDoc += m.doc;
@@ -874,9 +858,9 @@
 
           return `
             <tr class="hover:bg-slate-900/50 transition-colors">
-              <td class="p-3 font-bold text-white whitespace-nowrap">${item.date}</td>
+              <td class="p-3 font-bold text-white whitespace-nowrap">${formatDateID(item.date)}</td>
               <td class="p-3 font-semibold text-indigo-300">
-                <input type="text" value="${m.panel ? formatNum(m.panel) : ''}" onchange="window.inlineUpdatePanel('${item.date}', this.value)" class="w-28 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-xs text-white font-semibold">
+                <input type="text" value="${m.panel ? formatNum(m.panel) : ''}" onchange="window.inlineUpdateField('${item.date}', 'panel', this.value)" class="w-28 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-xs text-white font-semibold">
               </td>
               <td class="p-3 font-semibold text-amber-300">
                 <span>${m.doc ? formatNum(m.doc) : '0'}</span>
@@ -910,7 +894,7 @@
             tfoot.classList.remove('hidden');
             tfoot.innerHTML = `
               <tr>
-                <td class="p-3 text-white">TOTAL (${entries.length} HARI)</td>
+                <td class="p-3 text-white">TOTAL (${filteredEntries.length} HARI)</td>
                 <td class="p-3 text-indigo-300">${formatNum(sumPanel)}</td>
                 <td class="p-3 text-amber-300">${formatNum(sumDoc)}</td>
                 <td class="p-3 text-amber-400">${formatNum(sumPending)}</td>
@@ -929,11 +913,11 @@
         }
       }
 
-      window.inlineUpdatePanel = function(dateStr, val) {
+      window.inlineUpdateField = function(dateStr, field, val) {
         const entries = getEntries();
         const entry = entries.find(e => e.date === dateStr);
         if (entry) {
-          entry.panel = parseNum(val);
+          entry[field] = parseNum(val);
           saveToCloud(() => {
             renderTable();
             if (currentRole === 'master') calculateWeeklyPGA();
@@ -942,18 +926,27 @@
       };
 
       window.selectRowForEdit = function(dateStr) {
-        currentEditingDate = dateStr;
-        document.getElementById('editorDateSelect').value = dateStr;
-        loadEntryToEditor(dateStr);
+        document.getElementById('inputDateDirect').value = dateStr;
+        const entries = getEntries();
+        const entry = entries.find(e => e.date === dateStr);
+        if (!entry) return;
+
+        document.getElementById('input-panel').value = entry.panel ? formatNum(entry.panel) : '';
+        document.getElementById('input-doc').value = entry.doc ? formatNum(entry.doc) : '';
+        document.getElementById('input-motion-up').value = entry.motionUp ? formatNum(entry.motionUp) : '';
+        document.getElementById('input-motion-down').value = entry.motionDown ? formatNum(entry.motionDown) : '';
+        document.getElementById('input-motion-ewallet').value = entry.motionEwallet ? formatNum(entry.motionEwallet) : '';
+        document.getElementById('input-withdraw').value = entry.withdraw ? formatNum(entry.withdraw) : '';
+
+        updateLivePreview();
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        showToast('Memuat tanggal ' + dateStr + ' ke form');
+        showToast('Memuat data tanggal ' + formatDateID(dateStr) + ' ke form');
       };
 
       window.deleteEntry = function(dateStr) {
-        showConfirm('Hapus Data', 'Hapus rekap untuk tanggal ' + dateStr + '?', () => {
+        showConfirm('Hapus Data', 'Hapus rekap untuk tanggal ' + formatDateID(dateStr) + '?', () => {
           siteEntriesMap[activeSiteIndex] = getEntries().filter(e => e.date !== dateStr);
           saveToCloud(() => {
-            populateDateSelectors();
             renderTable();
             if (currentRole === 'master') calculateWeeklyPGA();
           });
@@ -964,7 +957,7 @@
         if (currentRole !== 'master') return;
         const start = document.getElementById('weekly-start-date').value;
         const end = document.getElementById('weekly-end-date').value;
-        document.getElementById('weekly-range-title').textContent = `PERIODE ${start || '...'} s/d ${end || '...'}`;
+        document.getElementById('weekly-range-title').textContent = `PERIODE ${formatDateID(start) || '...'} S/D ${formatDateID(end) || '...'}`;
 
         const entries = getEntries();
         const filtered = entries.filter(e => {
@@ -972,12 +965,13 @@
           return e.date >= start && e.date <= end;
         });
 
-        let upK = 0, upN = 0, downK = 0, downN = 0, ewK = 0, ewN = 0;
+        let upK = 0, upN = 0, downK = 0, downN = 0, ewK = 0, ewN = 0, totalWd = 0;
         filtered.forEach(item => {
           const m = calculateRowMetrics(item);
           upK += m.upKotor; upN += m.upNett;
           downK += m.downKotor; downN += m.downNett;
           ewK += m.ewKotor; ewN += m.ewNett;
+          totalWd += m.withdraw;
         });
 
         const totalKotor = upK + downK + ewK;
@@ -985,13 +979,14 @@
 
         document.getElementById('weekly-card-motion-nett').textContent = formatNum(totalNett);
 
-        const pgaInput = parseNum(document.getElementById('pga-total-input').value);
-        const selisih = totalNett - pgaInput;
+        const qrisInput = parseNum(document.getElementById('pga-total-input').value);
+        // Rumus Baru: Total Bersih Motion - Total WD - Saldo QRIS Mingguan = Selisih
+        const selisih = totalNett - totalWd - qrisInput;
         document.getElementById('weekly-card-selisih').textContent = formatNum(selisih);
 
         const statusEl = document.getElementById('weekly-card-status');
-        if (!pgaInput) {
-          statusEl.textContent = 'ISI TOTAL PGA';
+        if (!qrisInput && qrisInput !== 0) {
+          statusEl.textContent = 'ISI SALDO';
           statusEl.className = 'text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-800 text-slate-300';
         } else if (selisih === 0) {
           statusEl.textContent = 'COCOK';
@@ -1052,19 +1047,24 @@
         `;
       }
 
-      function renderPassLogsList() {
-        const container = document.getElementById('admin-pass-log-list');
-        if (!container) return;
-        if (passLogs.length === 0) {
-          container.innerHTML = '<p class="text-slate-500 italic">Belum ada perubahan sandi oleh Admin.</p>';
+      function renderWeeklyRecordsTable() {
+        const tbody = document.getElementById('weeklyRecordsTableBody');
+        if (!tbody) return;
+
+        if (!weeklyRecords || weeklyRecords.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-500 italic">Belum ada arsip pertinggal saldo QRIS mingguan.</td></tr>`;
           return;
         }
 
-        container.innerHTML = passLogs.map(item => `
-          <div class="flex items-center justify-between gap-2 py-1 border-b border-slate-800 last:border-b-0">
-            <span class="text-slate-400">${item.time}</span>
-            <span class="font-bold text-slate-200 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">${item.newPass}</span>
-          </div>
+        tbody.innerHTML = weeklyRecords.map((item, idx) => `
+          <tr class="hover:bg-slate-900/40">
+            <td class="p-3 font-bold text-indigo-300">${formatDateID(item.start)} s/d ${formatDateID(item.end)}</td>
+            <td class="p-3 text-emerald-400 font-semibold">${formatNum(item.totalNett)}</td>
+            <td class="p-3 text-rose-400 font-semibold">${formatNum(item.totalWd)}</td>
+            <td class="p-3 text-amber-300 font-semibold">${formatNum(item.qrisInput)}</td>
+            <td class="p-3 font-bold ${item.selisih === 0 ? 'text-emerald-400' : 'text-rose-400'}">${formatNum(item.selisih)}</td>
+            <td class="p-3 text-right text-slate-400 text-[11px]">${item.savedAt}</td>
+          </tr>
         `).join('');
       }
 
@@ -1097,19 +1097,24 @@
         }
 
         renderSiteTabs();
-        populateDateSelectors();
         renderTable();
+        updateDynamicFeeLabels();
 
         if (isMaster) {
           const todayStr = new Date().toISOString().split('T')[0];
           document.getElementById('weekly-start-date').value = todayStr;
           document.getElementById('weekly-end-date').value = todayStr;
           calculateWeeklyPGA();
+          renderWeeklyRecordsTable();
         }
       }
 
       document.addEventListener('DOMContentLoaded', function() {
         initFirebase();
+
+        // Default tanggal input harian ke hari ini
+        const todayStr = new Date().toISOString().split('T')[0];
+        document.getElementById('inputDateDirect').value = todayStr;
 
         document.getElementById('loginForm').addEventListener('submit', function(e) {
           e.preventDefault();
@@ -1170,31 +1175,6 @@
 
         const closeAdminPass = () => { document.getElementById('adminPassModal').classList.add('hidden'); document.getElementById('adminPassModal').classList.remove('flex'); };
         document.getElementById('btnCloseAdminPass').addEventListener('click', closeAdminPass);
-        document.getElementById('btnCloseAdminPass2').addEventListener('click', closeAdminPass);
-
-        document.getElementById('adminPassForm').addEventListener('submit', function(e) {
-          e.preventDefault();
-          const oldP = document.getElementById('admin-old-pass').value.trim();
-          const newP = document.getElementById('admin-new-pass').value.trim();
-          const adminP = credentials?.adminPass || 'admin123';
-
-          if (oldP !== adminP) {
-            document.getElementById('admin-pass-error').classList.remove('hidden');
-            return;
-          }
-          document.getElementById('admin-pass-error').classList.add('hidden');
-
-          credentials.adminPass = newP;
-
-          const timeStr = new Date().toLocaleString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-          const masked = newP.length > 2 ? newP[0] + '*'.repeat(newP.length - 2) + newP[newP.length - 1] : '***';
-          passLogs.unshift({ time: timeStr, newPass: masked });
-          if (passLogs.length > 20) passLogs.pop();
-
-          saveToCloud(() => {
-            closeAdminPass();
-          });
-        });
 
         document.getElementById('btnOpenFeeModal').addEventListener('click', function() {
           document.getElementById('setting-fee-up').value = fees.up;
@@ -1207,7 +1187,6 @@
           document.getElementById('setting-master-user').value = credentials.masterUser || 'master';
           document.getElementById('setting-master-pass').value = credentials.masterPass || 'master123';
 
-          renderPassLogsList();
           const m = document.getElementById('feeModal');
           m.classList.remove('hidden'); m.classList.add('flex');
         });
@@ -1236,51 +1215,53 @@
             closeFeeModal();
             renderSiteTabs();
             renderTable();
+            updateDynamicFeeLabels();
             if (currentRole === 'master') calculateWeeklyPGA();
           });
         });
 
-        document.getElementById('btnClearPassLogs').addEventListener('click', function() {
-          passLogs = [];
-          saveToCloud(() => {
-            renderPassLogsList();
-            showToast('Riwayat dibersihkan');
-          });
+        document.getElementById('btnResetToToday').addEventListener('click', function() {
+          const tDay = new Date().toISOString().split('T')[0];
+          document.getElementById('inputDateDirect').value = tDay;
+          loadEntryToEditor(tDay);
         });
 
-        document.getElementById('btnOpenAddDate').addEventListener('click', function() {
-          document.getElementById('new-date-input').value = new Date().toISOString().split('T')[0];
-          const m = document.getElementById('addDateModal');
-          m.classList.remove('hidden'); m.classList.add('flex');
+        document.getElementById('inputDateDirect').addEventListener('change', function() {
+          loadEntryToEditor(this.value);
         });
 
-        const closeAddDate = () => { document.getElementById('addDateModal').classList.add('hidden'); document.getElementById('addDateModal').classList.remove('flex'); };
-        document.getElementById('btnCloseAddDate').addEventListener('click', closeAddDate);
-        document.getElementById('btnCloseAddDate2').addEventListener('click', closeAddDate);
-
-        document.getElementById('addDateForm').addEventListener('submit', function(e) {
-          e.preventDefault();
-          const dt = document.getElementById('new-date-input').value;
-          if (!dt) return;
+        function loadEntryToEditor(dateStr) {
           const entries = getEntries();
-          if (entries.some(item => item.date === dt)) {
-            showToast('Tanggal tersebut sudah ada dalam daftar!', true);
-            return;
+          const entry = entries.find(e => e.date === dateStr);
+          if (entry) {
+            document.getElementById('input-panel').value = entry.panel ? formatNum(entry.panel) : '';
+            document.getElementById('input-doc').value = entry.doc ? formatNum(entry.doc) : '';
+            document.getElementById('input-motion-up').value = entry.motionUp ? formatNum(entry.motionUp) : '';
+            document.getElementById('input-motion-down').value = entry.motionDown ? formatNum(entry.motionDown) : '';
+            document.getElementById('input-motion-ewallet').value = entry.motionEwallet ? formatNum(entry.motionEwallet) : '';
+            document.getElementById('input-withdraw').value = entry.withdraw ? formatNum(entry.withdraw) : '';
+          } else {
+            clearEditor();
           }
-          entries.push({ id: dt, date: dt, panel: 0, doc: 0, motionUp: 0, motionDown: 0, motionEwallet: 0, withdraw: 0 });
-          saveToCloud(() => {
-            populateDateSelectors();
-            loadEntryToEditor(dt);
-            renderTable();
-            closeAddDate();
-          });
-        });
+          updateLivePreview();
+        }
+
+        function clearEditor() {
+          document.getElementById('input-panel').value = '';
+          document.getElementById('input-doc').value = '';
+          document.getElementById('input-motion-up').value = '';
+          document.getElementById('input-motion-down').value = '';
+          document.getElementById('input-motion-ewallet').value = '';
+          document.getElementById('input-withdraw').value = '';
+          document.getElementById('live-pending').textContent = '0';
+          document.getElementById('live-sisa').textContent = '0';
+          document.getElementById('live-total-bersih').textContent = '0';
+        }
 
         document.getElementById('btnResetSample').addEventListener('click', function() {
           showConfirm('Reset Data', 'Kembalikan data ke contoh awal?', () => {
             siteEntriesMap[activeSiteIndex] = JSON.parse(JSON.stringify(SAMPLE_ENTRIES));
             saveToCloud(() => {
-              populateDateSelectors();
               renderTable();
               if (currentRole === 'master') calculateWeeklyPGA();
               showToast('Data direset');
@@ -1299,7 +1280,7 @@
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;
-          a.download = `rekon_${siteNames[activeSiteIndex].toLowerCase().replace(/\s+/g, '_')}.csv`;
+          a.download = `rekon_${siteNames[activeSiteIndex].toLowerCase()}.csv`;
           a.click();
           showToast('File CSV berhasil diunduh');
         });
@@ -1314,16 +1295,18 @@
           });
         });
 
-        document.getElementById('editorDateSelect').addEventListener('change', function() {
-          loadEntryToEditor(this.value);
-        });
-
         document.getElementById('dailyForm').addEventListener('submit', function(e) {
           e.preventDefault();
+          const targetDate = document.getElementById('inputDateDirect').value;
+          if (!targetDate) {
+            showToast('Pilih tanggal terlebih dahulu!', true);
+            return;
+          }
+
           const entries = getEntries();
-          let entry = entries.find(e => e.date === currentEditingDate);
+          let entry = entries.find(e => e.date === targetDate);
           if (!entry) {
-            entry = { id: currentEditingDate, date: currentEditingDate };
+            entry = { id: targetDate, date: targetDate };
             entries.push(entry);
           }
 
@@ -1337,11 +1320,24 @@
           saveToCloud(() => {
             renderTable();
             if (currentRole === 'master') calculateWeeklyPGA();
-            loadEntryToEditor(currentEditingDate);
+            // Kosongkan form input dan kembalikan tanggal ke hari ini setelah simpan
+            clearEditor();
+            const tDay = new Date().toISOString().split('T')[0];
+            document.getElementById('inputDateDirect').value = tDay;
+            showToast('Data harian berhasil disimpan & form dibersihkan');
           });
         });
 
-        document.getElementById('pga-total-input').addEventListener('input', updateLivePreview);
+        // Filter Table Listeners
+        document.getElementById('btnApplyFilter').addEventListener('click', renderTable);
+        document.getElementById('btnClearFilter').addEventListener('click', function() {
+          document.getElementById('filterStartDate').value = '';
+          document.getElementById('filterEndDate').value = '';
+          renderTable();
+          showToast('Filter direset');
+        });
+
+        document.getElementById('pga-total-input').addEventListener('input', calculateWeeklyPGA);
         document.getElementById('pga-total-input').addEventListener('blur', function() {
           const val = parseNum(this.value);
           this.value = val !== 0 ? formatNum(val) : '';
@@ -1350,6 +1346,47 @@
 
         document.getElementById('weekly-start-date').addEventListener('change', calculateWeeklyPGA);
         document.getElementById('weekly-end-date').addEventListener('change', calculateWeeklyPGA);
+
+        document.getElementById('btnSaveWeeklyPgaRecord').addEventListener('click', function() {
+          const start = document.getElementById('weekly-start-date').value;
+          const end = document.getElementById('weekly-end-date').value;
+          if (!start || !end) {
+            showToast('Tentukan rentang tanggal periode mingguan!', true);
+            return;
+          }
+
+          const entries = getEntries();
+          const filtered = entries.filter(e => e.date >= start && e.date <= end);
+          let totalNett = 0, totalWd = 0;
+          filtered.forEach(item => {
+            const m = calculateRowMetrics(item);
+            totalNett += m.totalMotionNett;
+            totalWd += m.withdraw;
+          });
+
+          const qrisInput = parseNum(document.getElementById('pga-total-input').value);
+          const selisih = totalNett - totalWd - qrisInput;
+          const timeStr = new Date().toLocaleString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+          weeklyRecords.unshift({
+            start, end, totalNett, totalWd, qrisInput, selisih, savedAt: timeStr
+          });
+
+          saveToCloud(() => {
+            renderWeeklyRecordsTable();
+            showToast('Arsip saldo QRIS mingguan berhasil disimpan!');
+          });
+        });
+
+        document.getElementById('btnClearWeeklyRecords').addEventListener('click', function() {
+          showConfirm('Hapus Arsip', 'Hapus semua riwayat pertinggal saldo mingguan?', () => {
+            weeklyRecords = [];
+            saveToCloud(() => {
+              renderWeeklyRecordsTable();
+              showToast('Riwayat dibersihkan');
+            });
+          });
+        });
 
         const activeSess = sessionStorage.getItem(STORAGE_KEY_SESSION);
         if (activeSess) {
