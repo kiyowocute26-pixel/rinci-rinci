@@ -137,7 +137,7 @@
             <div class="flex items-center gap-2 w-full sm:w-auto">
               <label class="text-xs font-semibold text-slate-400 whitespace-nowrap">Tanggal:</label>
               <input type="date" id="inputDateDirect" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white font-semibold focus:outline-none focus:border-indigo-500">
-              <button id="btnResetToToday" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-300 transition-colors" title="Hari Ini">
+              <button id="btnResetToToday" type="button" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-300 transition-colors" title="Hari Ini">
                 Hari Ini
               </button>
             </div>
@@ -264,8 +264,8 @@
               <input type="date" id="filterStartDate" class="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-white font-semibold focus:outline-none focus:border-indigo-500">
               <span class="text-xs text-slate-400">s/d:</span>
               <input type="date" id="filterEndDate" class="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-white font-semibold focus:outline-none focus:border-indigo-500">
-              <button id="btnApplyFilter" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl text-xs">Filter</button>
-              <button id="btnClearFilter" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl text-xs">Reset</button>
+              <button id="btnApplyFilter" type="button" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl text-xs">Filter</button>
+              <button id="btnClearFilter" type="button" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl text-xs">Reset</button>
 
               <!-- Kotak Total Pending & Sisa Permanen -->
               <div id="filteredSummaryBox" class="flex items-center gap-2 bg-slate-950 border border-indigo-500/40 rounded-xl px-3 py-1.5 text-xs">
@@ -274,11 +274,11 @@
                 <div><span class="text-slate-400">Tot Sisa:</span> <span id="filter-total-sisa" class="font-bold text-cyan-400">0</span></div>
               </div>
 
-              <button id="btnExportCSV" class="master-only px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-200 transition-colors flex items-center gap-1.5 hidden">
+              <button id="btnExportCSV" type="button" class="master-only px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl text-xs font-semibold text-slate-200 transition-colors flex items-center gap-1.5 hidden">
                 <i class="fa-solid fa-download text-indigo-400"></i>
                 <span>Export CSV</span>
               </button>
-              <button id="btnResetSample" class="master-only px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-amber-400 transition-colors flex items-center gap-1.5 hidden">
+              <button id="btnResetSample" type="button" class="master-only px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl text-xs font-semibold text-amber-400 transition-colors flex items-center gap-1.5 hidden">
                 <i class="fa-solid fa-rotate-right"></i>
                 <span>Reset</span>
               </button>
@@ -328,9 +328,9 @@
             </div>
           </div>
 
-          <!-- 5 Kartu Utama (Total Bersih Motion Setelah WD, Total Withdraw, Selisih Akhir, Saldo QRIS, Simpan Pertinggal) -->
+          <!-- 5 Kartu Utama: TOTAL BERSIH MOTION (STLH WD), TOTAL WITHDRAW, SELISIH AKHIR, SALDO QRIS MINGGUAN, SIMPAN PERTINGGAL -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            <!-- Kartu 1: Total Bersih Motion (Sudah Dipotong Total Withdraw) -->
+            <!-- Kartu 1: Total Bersih Motion (Setelah WD) -->
             <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
               <div>
                 <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">TOTAL BERSIH MOTION</span>
@@ -338,7 +338,7 @@
               </div>
               <div class="mt-2 pt-2 border-t border-slate-800/80 text-[11px] text-slate-400 flex items-center justify-between">
                 <span>Sebelum WD:</span>
-                <span id="store-card-motion-gross" class="font-semibold text-slate-300">0</span>
+                <span id="store-card-motion-before-wd" class="font-semibold text-slate-300">0</span>
               </div>
             </div>
 
@@ -377,7 +377,7 @@
             <!-- Kartu 5: Simpan Pertinggal -->
             <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
               <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">SIMPAN PERTINGGAL</span>
-              <button id="btnSaveStoreWeeklyRecord" class="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs shadow-md shadow-amber-600/30 transition-all flex items-center justify-center gap-1.5">
+              <button id="btnSaveStoreWeeklyRecord" type="button" class="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs shadow-md shadow-amber-600/30 transition-all flex items-center justify-center gap-1.5">
                 <i class="fa-solid fa-bookmark"></i>
                 <span>Simpan Saldo Minggu Ini</span>
               </button>
@@ -444,14 +444,14 @@
           <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden mt-4">
             <div class="p-3 bg-slate-900/80 border-b border-slate-800 flex items-center justify-between text-xs font-bold text-indigo-300">
               <span>RIWAYAT PERTINGGAL SALDO QRIS MINGGUAN (ARSIP CLOUD)</span>
-              <button id="btnClearStoreWeeklyRecords" class="text-[10px] text-rose-400 hover:text-rose-300">Hapus Riwayat</button>
+              <button id="btnClearStoreWeeklyRecords" type="button" class="text-[10px] text-rose-400 hover:text-rose-300">Hapus Riwayat</button>
             </div>
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse text-xs">
                 <thead>
                   <tr class="bg-slate-900/40 text-slate-400 uppercase border-b border-slate-800">
                     <th class="p-3 font-semibold">PERIODE</th>
-                    <th class="p-3 font-semibold">TOTAL BERSIH MOTION</th>
+                    <th class="p-3 font-semibold">TOTAL BERSIH (STLH WD)</th>
                     <th class="p-3 font-semibold">TOTAL WD</th>
                     <th class="p-3 font-semibold">SALDO QRIS</th>
                     <th class="p-3 font-semibold">SELISIH</th>
@@ -476,7 +476,7 @@
                 <i class="fa-solid fa-globe text-amber-400"></i>
                 <span>Dashboard Global Master (QRIS, AKRN, Admin Fee & Cashout)</span>
               </h2>
-              <p class="text-xs text-slate-400">Rekapitulasi gabungan seluruh toko dalam format spreadsheet</p>
+              <p class="text-xs text-slate-400">Pilih periode tanggal untuk mengisi QRIS otomatis dari Total Bersih Motion (stlh WD) per toko</p>
             </div>
 
             <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
@@ -487,16 +487,16 @@
             </div>
           </div>
 
-          <!-- Tabel Rincian Atas (QRIS Manual, AKRN, Admin Fee, Cashout, Total) -->
+          <!-- Tabel Rincian Atas (QRIS Otomatis/Manual, AKRN, Admin Fee, Cashout, Total) -->
           <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
             
-            <!-- Kolom QRIS (Manual Input) -->
+            <!-- Kolom QRIS (Auto-fill saat pilih tanggal + Bisa Edit/Tambah Manual) -->
             <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                 <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">QRIS</span>
-                <button onclick="window.addQrisRow()" class="text-[10px] bg-cyan-600/20 text-cyan-300 px-2 py-0.5 rounded border border-cyan-500/30">+ Tambah</button>
+                <button type="button" onclick="window.addQrisRow()" class="text-[10px] bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 px-2 py-0.5 rounded border border-cyan-500/30">+ Tambah</button>
               </div>
-              <div class="space-y-2 text-xs max-h-48 overflow-y-auto" id="master-qris-rows">
+              <div class="space-y-2 text-xs max-h-48 overflow-y-auto pr-1" id="master-qris-rows">
                 <!-- Rendered via JS -->
               </div>
               <div class="pt-2 border-t border-slate-800 flex justify-between font-bold text-xs">
@@ -509,9 +509,9 @@
             <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                 <span class="text-xs font-bold text-teal-400 uppercase tracking-wider">AKRN</span>
-                <button onclick="window.addAkrnRow()" class="text-[10px] bg-teal-600/20 text-teal-300 px-2 py-0.5 rounded border border-teal-500/30">+ Tambah</button>
+                <button type="button" onclick="window.addAkrnRow()" class="text-[10px] bg-teal-600/20 hover:bg-teal-600/30 text-teal-300 px-2 py-0.5 rounded border border-teal-500/30">+ Tambah</button>
               </div>
-              <div class="space-y-2 text-xs max-h-48 overflow-y-auto" id="master-akrn-rows">
+              <div class="space-y-2 text-xs max-h-48 overflow-y-auto pr-1" id="master-akrn-rows">
                 <!-- Rendered via JS -->
               </div>
               <div class="pt-2 border-t border-slate-800 flex justify-between font-bold text-xs">
@@ -524,9 +524,9 @@
             <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                 <span class="text-xs font-bold text-rose-400 uppercase tracking-wider">ADMIN FEE</span>
-                <button onclick="window.addAdminFeeRow()" class="text-[10px] bg-rose-600/20 text-rose-300 px-2 py-0.5 rounded border border-rose-500/30">+ Tambah</button>
+                <button type="button" onclick="window.addAdminFeeRow()" class="text-[10px] bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 px-2 py-0.5 rounded border border-rose-500/30">+ Tambah</button>
               </div>
-              <div class="space-y-2 text-xs max-h-48 overflow-y-auto" id="master-adminfee-rows">
+              <div class="space-y-2 text-xs max-h-48 overflow-y-auto pr-1" id="master-adminfee-rows">
                 <!-- Rendered via JS -->
               </div>
               <div class="pt-2 border-t border-slate-800 flex justify-between font-bold text-xs">
@@ -539,9 +539,9 @@
             <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                 <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">CASHOUT</span>
-                <button onclick="window.addCashoutRow()" class="text-[10px] bg-indigo-600/20 text-indigo-300 px-2 py-0.5 rounded border border-indigo-500/30">+ Tambah</button>
+                <button type="button" onclick="window.addCashoutRow()" class="text-[10px] bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 px-2 py-0.5 rounded border border-indigo-500/30">+ Tambah</button>
               </div>
-              <div class="space-y-2 text-xs max-h-48 overflow-y-auto" id="master-cashout-rows">
+              <div class="space-y-2 text-xs max-h-48 overflow-y-auto pr-1" id="master-cashout-rows">
                 <!-- Rendered via JS -->
               </div>
               <div class="pt-2 border-t border-slate-800 flex justify-between font-bold text-xs">
@@ -555,7 +555,7 @@
               <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                 <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">TOTAL (HASIL)</span>
               </div>
-              <div class="space-y-2 text-xs max-h-48 overflow-y-auto" id="master-total-rows">
+              <div class="space-y-2 text-xs max-h-48 overflow-y-auto pr-1" id="master-total-rows">
                 <!-- Rendered via JS -->
               </div>
               <div class="pt-2 border-t border-slate-800 flex justify-between font-bold text-xs">
@@ -570,7 +570,7 @@
           <div class="bg-slate-950 border border-slate-800 rounded-xl p-5 space-y-3">
             <div class="flex items-center justify-between border-b border-slate-800 pb-2">
               <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">RINGKASAN AKHIR (ALL)</span>
-              <button id="btnSaveMasterRecord" class="px-4 py-1.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-lg text-xs">Simpan Arsip Global</button>
+              <button id="btnSaveMasterRecord" type="button" class="px-4 py-1.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-lg text-xs">Simpan Arsip Global</button>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 text-xs font-semibold">
@@ -601,7 +601,7 @@
           <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden mt-4">
             <div class="p-3 bg-slate-900/80 border-b border-slate-800 flex items-center justify-between text-xs font-bold text-indigo-300">
               <span>RIWAYAT ARSIP GLOBAL MASTER</span>
-              <button id="btnClearMasterRecords" class="text-[10px] text-rose-400 hover:text-rose-300">Hapus Riwayat</button>
+              <button id="btnClearMasterRecords" type="button" class="text-[10px] text-rose-400 hover:text-rose-300">Hapus Riwayat</button>
             </div>
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse text-xs">
@@ -633,7 +633,7 @@
     <div class="w-full max-w-sm bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-6 space-y-4">
       <div class="flex items-center justify-between pb-2 border-b border-slate-800">
         <h3 class="font-bold text-white text-base">Tambah Toko / Situs Baru</h3>
-        <button id="btnCloseAddStore" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        <button id="btnCloseAddStore" type="button" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div>
         <label class="block text-xs font-semibold uppercase text-slate-400 mb-1">Nama Toko (Contoh: ETG, STG)</label>
@@ -655,7 +655,7 @@
           <i class="fa-solid fa-key text-amber-400"></i>
           <span>Ganti Kata Sandi Admin</span>
         </h3>
-        <button id="btnCloseAdminPass" class="text-slate-400 hover:text-white">
+        <button id="btnCloseAdminPass" type="button" class="text-slate-400 hover:text-white">
           <i class="fa-solid fa-xmark text-lg"></i>
         </button>
       </div>
@@ -690,7 +690,7 @@
           <i class="fa-solid fa-gear text-amber-400"></i>
           <span>Pengaturan Master, Fee & Akun Login</span>
         </h3>
-        <button id="btnCloseFeeModal" class="text-slate-400 hover:text-white">
+        <button id="btnCloseFeeModal" type="button" class="text-slate-400 hover:text-white">
           <i class="fa-solid fa-xmark text-lg"></i>
         </button>
       </div>
@@ -764,8 +764,8 @@
       <h3 id="confirmTitle" class="font-bold text-white text-base">Konfirmasi</h3>
       <p id="confirmDesc" class="text-xs text-slate-400">Apakah Anda yakin ingin melanjutkan tindakan ini?</p>
       <div class="flex items-center justify-center gap-3 pt-2">
-        <button id="confirmBtnCancel" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">Batal</button>
-        <button id="confirmBtnYes" class="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold">Ya, Lanjutkan</button>
+        <button id="confirmBtnCancel" type="button" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">Batal</button>
+        <button id="confirmBtnYes" type="button" class="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold">Ya, Lanjutkan</button>
       </div>
     </div>
   </div>
@@ -782,8 +782,18 @@
       let credentials = { adminUser: 'admin', adminPass: 'admin123', masterUser: 'master', masterPass: 'master123' };
       
       let storeWeeklyInputs = {};
-      let masterQrisRows = [{ name: 'JTG', amount: 0 }, { name: 'ATG', amount: 0 }, { name: 'DTG', amount: 0 }, { name: 'VTG', amount: 0 }];
-      let masterAkrnRows = [{ name: 'JAGO', amount: 0 }, { name: 'ASLI', amount: 0 }, { name: 'DAMRI', amount: 0 }, { name: 'VARIO', amount: 0 }];
+      let masterQrisRows = [
+        { name: 'JTG', amount: 0 },
+        { name: 'ATG', amount: 0 },
+        { name: 'DTG', amount: 0 },
+        { name: 'VTG', amount: 0 }
+      ];
+      let masterAkrnRows = [
+        { name: 'JAGO', amount: 0 },
+        { name: 'ASLI', amount: 0 },
+        { name: 'DAMRI', amount: 0 },
+        { name: 'VARIO', amount: 0 }
+      ];
       let masterAdminFeeRows = [{ name: 'Fee 1', amount: 0 }];
       let masterCashoutRows = [{ name: 'Cashout 1', amount: 0 }];
       let masterRecords = [];
@@ -809,6 +819,7 @@
       let db = null;
       let unsubscribeFirestore = null;
 
+      // Inisialisasi Firebase Firestore
       function initFirebase() {
         const fbCfg = {
           apiKey: "AIzaSyB9iWMbLqoyk40wuRIvg86_xKZhXzOrGHg",
@@ -827,7 +838,7 @@
           db = firebase.firestore();
           updateCloudIndicator('live');
           setupFirestoreSync();
-        } catch(e) {
+        } catch (e) {
           console.error("Firebase Init Error:", e);
           updateCloudIndicator('error');
         }
@@ -845,6 +856,7 @@
         }
       }
 
+      // Sinkronisasi Real-Time dengan Dokumen Utama Firestore
       function setupFirestoreSync() {
         if (!db) return;
         if (unsubscribeFirestore) unsubscribeFirestore();
@@ -877,9 +889,10 @@
         });
       }
 
-      function saveToCloud(onSuccess) {
+      // Simpan State Aplikasi ke Cloud Firestore
+      function saveToCloud(onSuccess, silent = false) {
         if (!db) {
-          showToast('Database belum terhubung!', true);
+          if (!silent) showToast('Database belum terhubung!', true);
           return;
         }
         db.collection("rinci_data").doc("main_state").set({
@@ -895,11 +908,11 @@
           masterRecords,
           updatedAt: Date.now()
         }, { merge: true }).then(() => {
-          showToast('Data berhasil disimpan ke Cloud!');
+          if (!silent) showToast('Data berhasil disimpan ke Cloud!');
           if (onSuccess) onSuccess();
         }).catch(err => {
           console.error("Cloud save error:", err);
-          showToast('Gagal ke Cloud: ' + err.message, true);
+          if (!silent) showToast('Gagal ke Cloud: ' + err.message, true);
         });
       }
 
@@ -924,6 +937,10 @@
         const parts = dateStr.split('-');
         if (parts.length !== 3) return dateStr;
         return `${parts[2]}/${parts[1]}/${parts[0].slice(-2)}`;
+      }
+
+      function escapeAttr(str) {
+        return String(str || '').replace(/"/g, '&quot;');
       }
 
       function showToast(msg, isErr = false) {
@@ -957,6 +974,7 @@
         document.getElementById('confirmBtnCancel').addEventListener('click', clean);
       }
 
+      // Kalkulasi Metrik Setiap Baris Harian
       function calculateRowMetrics(item) {
         const panel = Number(item.panel) || 0;
         const doc = Number(item.doc) || 0;
@@ -1026,7 +1044,15 @@
         if (idx === 'global') {
           storeContainer.classList.add('hidden');
           globalContainer.classList.remove('hidden');
-          if (currentRole === 'master') renderGlobalMasterDashboard();
+          if (currentRole === 'master') {
+            const mStart = document.getElementById('master-start-date').value;
+            const mEnd = document.getElementById('master-end-date').value;
+            if (mStart || mEnd) {
+              autoPopulateMasterQrisFromDates(true);
+            } else {
+              renderGlobalMasterDashboard();
+            }
+          }
         } else {
           storeContainer.classList.remove('hidden');
           globalContainer.classList.add('hidden');
@@ -1130,8 +1156,8 @@
               <td class="p-3 font-bold text-rose-400">${formatNum(m.withdraw)}</td>
               <td class="p-3 font-bold ${m.sisa !== 0 ? 'text-cyan-400' : 'text-slate-400'}">${formatNum(m.sisa)}</td>
               <td class="p-3 text-right space-x-2 whitespace-nowrap">
-                <button onclick="window.selectRowForEdit('${item.date}')" class="px-2.5 py-1 rounded bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 font-semibold">Edit</button>
-                <button onclick="window.deleteEntry('${item.date}')" class="master-only ${currentRole === 'master' ? '' : 'hidden'} px-2.5 py-1 rounded bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 font-semibold">Hapus</button>
+                <button type="button" onclick="window.selectRowForEdit('${item.date}')" class="px-2.5 py-1 rounded bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 font-semibold">Edit</button>
+                <button type="button" onclick="window.deleteEntry('${item.date}')" class="master-only ${currentRole === 'master' ? '' : 'hidden'} px-2.5 py-1 rounded bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 font-semibold">Hapus</button>
               </td>
             </tr>
           `;
@@ -1178,6 +1204,7 @@
         });
       };
 
+      // ================= PER-STORE WEEKLY DASHBOARD =================
       function renderStoreWeeklyDashboard() {
         if (activeSiteIndex === 'global' || currentRole !== 'master') return;
         const start = document.getElementById('store-weekly-start').value;
@@ -1185,7 +1212,9 @@
 
         const entries = getEntries();
         const filtered = entries.filter(e => {
-          if (!start || !end) return true;
+          if (!start && !end) return true;
+          if (start && !end) return e.date >= start;
+          if (!start && end) return e.date <= end;
           return e.date >= start && e.date <= end;
         });
 
@@ -1203,17 +1232,17 @@
         });
 
         const totalNett = upNett + downNett + ewNett;
-        const motionSetelahWd = totalNett - totalWd;
+        const netAfterWd = totalNett - totalWd;
         const totKotor = upK + downK + ewK;
         const tot150 = up150 + down150 + ew150;
         const tot055 = down055;
         const tot080 = up080;
 
-        // Kartu 1: Total Bersih Motion (Sudah Dipotong Total Withdraw) + Info Sebelum WD
-        document.getElementById('store-card-motion').textContent = formatNum(motionSetelahWd);
-        document.getElementById('store-card-motion-gross').textContent = formatNum(totalNett);
+        // Kartu 1: TOTAL BERSIH MOTION (Setelah WD) + sub-label Sebelum WD
+        document.getElementById('store-card-motion').textContent = formatNum(netAfterWd);
+        document.getElementById('store-card-motion-before-wd').textContent = formatNum(totalNett);
 
-        // Kartu 2: Total Withdraw
+        // Kartu 2: TOTAL WITHDRAW
         document.getElementById('store-card-withdraw').textContent = formatNum(totalWd);
 
         // Tabel Rincian Kategori Fee
@@ -1238,16 +1267,16 @@
         document.getElementById('fee-tot-080').textContent = formatNum(tot080);
         document.getElementById('fee-tot-nett').textContent = formatNum(totalNett);
 
-        // Sinkronisasi input Saldo QRIS saat pindah toko / sync jika tidak sedang diketik
+        // Kartu 4: Saldo QRIS Mingguan (sinkron dengan storeWeeklyInputs[activeSiteIndex].qris)
         if (!storeWeeklyInputs[activeSiteIndex]) storeWeeklyInputs[activeSiteIndex] = { qris: 0, records: [] };
         const qrisInput = Number(storeWeeklyInputs[activeSiteIndex].qris) || 0;
         const qrisInputEl = document.getElementById('store-qris-input');
         if (qrisInputEl && document.activeElement !== qrisInputEl) {
           qrisInputEl.value = qrisInput !== 0 ? formatNum(qrisInput) : '';
         }
-        
-        // Rumus: (Total Bersih Motion - Total WD) - Saldo QRIS = Selisih Akhir
-        const selisih = (totalNett - totalWd) - qrisInput;
+
+        // Kartu 3: Selisih Akhir = (Total Bersih Motion - Total WD) - Saldo QRIS
+        const selisih = Math.round(netAfterWd) - qrisInput;
         document.getElementById('store-card-selisih').textContent = formatNum(selisih);
 
         const statusEl = document.getElementById('store-selisih-status');
@@ -1276,114 +1305,220 @@
           return;
         }
 
-        tbody.innerHTML = data.map((item) => `
-          <tr class="hover:bg-slate-900/40">
-            <td class="p-3 font-bold text-indigo-300">${formatDateID(item.start)} s/d ${formatDateID(item.end)}</td>
-            <td class="p-3 text-emerald-400 font-semibold">${formatNum(item.totalNett)}</td>
-            <td class="p-3 text-rose-400 font-semibold">${formatNum(item.totalWd)}</td>
-            <td class="p-3 text-amber-300 font-semibold">${formatNum(item.qrisInput)}</td>
-            <td class="p-3 font-bold ${item.selisih === 0 ? 'text-emerald-400' : 'text-rose-400'}">${formatNum(item.selisih)}</td>
-            <td class="p-3 text-right text-slate-400 text-[11px]">${item.savedAt || '-'}</td>
-          </tr>
-        `).join('');
+        tbody.innerHTML = data.map((item) => {
+          const displayNetAfterWd = item.netAfterWd !== undefined
+            ? item.netAfterWd
+            : ((Number(item.totalNett) || 0) - (Number(item.totalWd) || 0));
+          return `
+            <tr class="hover:bg-slate-900/40">
+              <td class="p-3 font-bold text-indigo-300">${formatDateID(item.start)} s/d ${formatDateID(item.end)}</td>
+              <td class="p-3 text-emerald-400 font-semibold">${formatNum(displayNetAfterWd)}</td>
+              <td class="p-3 text-rose-400 font-semibold">${formatNum(item.totalWd)}</td>
+              <td class="p-3 text-amber-300 font-semibold">${formatNum(item.qrisInput)}</td>
+              <td class="p-3 font-bold ${Math.round(item.selisih) === 0 ? 'text-emerald-400' : 'text-rose-400'}">${formatNum(item.selisih)}</td>
+              <td class="p-3 text-right text-slate-400 text-[11px]">${item.savedAt || '-'}</td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // ================= GLOBAL MASTER DASHBOARD =================
+      // Hitung TOTAL BERSIH MOTION setelah WD untuk tiap toko pada rentang tanggal terpilih
+      function calculateStoreNetAfterWdForRange(storeIdx, startDate, endDate) {
+        const entries = siteEntriesMap[storeIdx] || [];
+        const filtered = entries.filter(e => {
+          if (!startDate && !endDate) return true;
+          if (startDate && !endDate) return e.date >= startDate;
+          if (!startDate && endDate) return e.date <= endDate;
+          return e.date >= startDate && e.date <= endDate;
+        });
+
+        let totalMotionNett = 0;
+        let totalWithdraw = 0;
+        filtered.forEach(item => {
+          const m = calculateRowMetrics(item);
+          totalMotionNett += m.totalMotionNett;
+          totalWithdraw += m.withdraw;
+        });
+
+        return Math.round(totalMotionNett - totalWithdraw);
+      }
+
+      // Isi otomatis kolom QRIS dengan TOTAL BERSIH MOTION (setelah WD) per toko saat memilih tanggal
+      function autoPopulateMasterQrisFromDates(shouldSave = true, showNotification = false) {
+        if (currentRole !== 'master') return;
+        const startEl = document.getElementById('master-start-date');
+        const endEl = document.getElementById('master-end-date');
+        if (!startEl || !endEl) return;
+
+        const start = startEl.value;
+        const end = endEl.value;
+
+        if (!start && !end) {
+          renderGlobalMasterDashboard();
+          return;
+        }
+
+        // Hitung nilai bersih setelah WD untuk masing-masing toko di siteNames
+        const storeValuesMap = {};
+        siteNames.forEach((name, idx) => {
+          const key = name.trim().toUpperCase();
+          storeValuesMap[key] = calculateStoreNetAfterWdForRange(idx, start, end);
+        });
+
+        const matchedStores = new Set();
+        const updatedRows = [];
+
+        // Perbarui baris toko yang sudah ada di masterQrisRows & pertahankan baris tambahan manual (+ Tambah)
+        masterQrisRows.forEach(row => {
+          const rowKey = (row.name || '').trim().toUpperCase();
+          if (Object.prototype.hasOwnProperty.call(storeValuesMap, rowKey) && !matchedStores.has(rowKey)) {
+            matchedStores.add(rowKey);
+            updatedRows.push({
+              name: row.name,
+              amount: storeValuesMap[rowKey]
+            });
+          } else {
+            updatedRows.push({
+              name: row.name,
+              amount: Number(row.amount) || 0
+            });
+          }
+        });
+
+        // Tambahkan toko baru dari siteNames jika belum ada di masterQrisRows
+        const missingStoreRows = [];
+        siteNames.forEach((name) => {
+          const key = name.trim().toUpperCase();
+          if (!matchedStores.has(key)) {
+            matchedStores.add(key);
+            missingStoreRows.push({
+              name: name,
+              amount: storeValuesMap[key]
+            });
+          }
+        });
+
+        masterQrisRows = [...missingStoreRows, ...updatedRows];
+        renderGlobalMasterDashboard();
+
+        if (shouldSave) {
+          saveToCloud(() => {
+            if (showNotification) {
+              showToast('Kolom QRIS otomatis terisi dari Total Bersih Motion (stlh WD)');
+            }
+          }, true);
+        }
       }
 
       window.addQrisRow = function() {
         masterQrisRows.push({ name: 'QRIS Baru', amount: 0 });
         renderGlobalMasterDashboard();
+        saveToCloud(null, true);
       };
       window.removeQrisRow = function(idx) {
         masterQrisRows.splice(idx, 1);
         renderGlobalMasterDashboard();
+        saveToCloud(null, true);
       };
 
       window.addAkrnRow = function() {
         masterAkrnRows.push({ name: 'AKRN Baru', amount: 0 });
         renderGlobalMasterDashboard();
+        saveToCloud(null, true);
       };
       window.removeAkrnRow = function(idx) {
         masterAkrnRows.splice(idx, 1);
         renderGlobalMasterDashboard();
+        saveToCloud(null, true);
       };
 
       window.addAdminFeeRow = function() {
         masterAdminFeeRows.push({ name: 'Fee Baru', amount: 0 });
         renderGlobalMasterDashboard();
+        saveToCloud(null, true);
       };
       window.removeAdminFeeRow = function(idx) {
         masterAdminFeeRows.splice(idx, 1);
         renderGlobalMasterDashboard();
+        saveToCloud(null, true);
       };
 
       window.addCashoutRow = function() {
         masterCashoutRows.push({ name: 'Cashout Baru', amount: 0 });
         renderGlobalMasterDashboard();
+        saveToCloud(null, true);
       };
       window.removeCashoutRow = function(idx) {
         masterCashoutRows.splice(idx, 1);
         renderGlobalMasterDashboard();
+        saveToCloud(null, true);
       };
 
       function renderGlobalMasterDashboard() {
         if (currentRole !== 'master') return;
 
-        // Render QRIS Manual Rows
+        // Render Kolom QRIS
         const qrisContainer = document.getElementById('master-qris-rows');
         let totalQris = 0;
         qrisContainer.innerHTML = masterQrisRows.map((item, idx) => {
           totalQris += Number(item.amount) || 0;
           return `
-            <div class="flex items-center gap-2 bg-slate-900 p-1.5 rounded-lg">
-              <input type="text" value="${item.name}" onchange="window.updateMasterField('qris', ${idx}, 'name', this.value)" class="w-20 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-white">
-              <input type="text" value="${item.amount ? formatNum(item.amount) : ''}" placeholder="0" onchange="window.updateMasterField('qris', ${idx}, 'amount', this.value)" class="w-24 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-cyan-400 font-bold text-right">
-              <button onclick="window.removeQrisRow(${idx})" class="text-rose-400 hover:text-rose-300 px-1"><i class="fa-solid fa-xmark"></i></button>
+            <div class="flex items-center gap-1.5 bg-slate-900 p-1.5 rounded-lg">
+              <input type="text" value="${escapeAttr(item.name)}" onchange="window.updateMasterField('qris', ${idx}, 'name', this.value)" class="w-16 shrink-0 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-white font-semibold">
+              <input type="text" value="${item.amount !== 0 ? formatNum(item.amount) : ''}" placeholder="0" onchange="window.updateMasterField('qris', ${idx}, 'amount', this.value)" class="flex-1 min-w-0 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-cyan-400 font-bold text-right">
+              <button type="button" onclick="window.removeQrisRow(${idx})" class="text-rose-400 hover:text-rose-300 px-1 shrink-0" title="Hapus baris"><i class="fa-solid fa-xmark"></i></button>
             </div>
           `;
         }).join('');
         document.getElementById('master-qris-total').textContent = formatNum(totalQris);
 
+        // Render Kolom AKRN
         const akrnContainer = document.getElementById('master-akrn-rows');
         let totalAkrn = 0;
         akrnContainer.innerHTML = masterAkrnRows.map((item, idx) => {
           totalAkrn += Number(item.amount) || 0;
           return `
-            <div class="flex items-center gap-2 bg-slate-900 p-1.5 rounded-lg">
-              <input type="text" value="${item.name}" onchange="window.updateMasterField('akrn', ${idx}, 'name', this.value)" class="w-20 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-white">
-              <input type="text" value="${item.amount ? formatNum(item.amount) : ''}" placeholder="0" onchange="window.updateMasterField('akrn', ${idx}, 'amount', this.value)" class="w-24 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-teal-400 font-bold text-right">
-              <button onclick="window.removeAkrnRow(${idx})" class="text-rose-400 hover:text-rose-300 px-1"><i class="fa-solid fa-xmark"></i></button>
+            <div class="flex items-center gap-1.5 bg-slate-900 p-1.5 rounded-lg">
+              <input type="text" value="${escapeAttr(item.name)}" onchange="window.updateMasterField('akrn', ${idx}, 'name', this.value)" class="w-16 shrink-0 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-white font-semibold">
+              <input type="text" value="${item.amount !== 0 ? formatNum(item.amount) : ''}" placeholder="0" onchange="window.updateMasterField('akrn', ${idx}, 'amount', this.value)" class="flex-1 min-w-0 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-teal-400 font-bold text-right">
+              <button type="button" onclick="window.removeAkrnRow(${idx})" class="text-rose-400 hover:text-rose-300 px-1 shrink-0" title="Hapus baris"><i class="fa-solid fa-xmark"></i></button>
             </div>
           `;
         }).join('');
         document.getElementById('master-akrn-total').textContent = formatNum(totalAkrn);
 
+        // Render Kolom ADMIN FEE
         const adminFeeContainer = document.getElementById('master-adminfee-rows');
         let totalAdminFee = 0;
         adminFeeContainer.innerHTML = masterAdminFeeRows.map((item, idx) => {
           totalAdminFee += Number(item.amount) || 0;
           return `
-            <div class="flex items-center gap-2 bg-slate-900 p-1.5 rounded-lg">
-              <input type="text" value="${item.name}" onchange="window.updateMasterField('adminfee', ${idx}, 'name', this.value)" class="w-20 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-white">
-              <input type="text" value="${item.amount ? formatNum(item.amount) : ''}" placeholder="0" onchange="window.updateMasterField('adminfee', ${idx}, 'amount', this.value)" class="w-24 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-rose-400 font-bold text-right">
-              <button onclick="window.removeAdminFeeRow(${idx})" class="text-rose-400 hover:text-rose-300 px-1"><i class="fa-solid fa-xmark"></i></button>
+            <div class="flex items-center gap-1.5 bg-slate-900 p-1.5 rounded-lg">
+              <input type="text" value="${escapeAttr(item.name)}" onchange="window.updateMasterField('adminfee', ${idx}, 'name', this.value)" class="w-16 shrink-0 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-white font-semibold">
+              <input type="text" value="${item.amount !== 0 ? formatNum(item.amount) : ''}" placeholder="0" onchange="window.updateMasterField('adminfee', ${idx}, 'amount', this.value)" class="flex-1 min-w-0 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-rose-400 font-bold text-right">
+              <button type="button" onclick="window.removeAdminFeeRow(${idx})" class="text-rose-400 hover:text-rose-300 px-1 shrink-0" title="Hapus baris"><i class="fa-solid fa-xmark"></i></button>
             </div>
           `;
         }).join('');
         document.getElementById('master-adminfee-total').textContent = formatNum(totalAdminFee);
 
+        // Render Kolom CASHOUT
         const cashoutContainer = document.getElementById('master-cashout-rows');
         let totalCashout = 0;
         cashoutContainer.innerHTML = masterCashoutRows.map((item, idx) => {
           totalCashout += Number(item.amount) || 0;
           return `
-            <div class="flex items-center gap-2 bg-slate-900 p-1.5 rounded-lg">
-              <input type="text" value="${item.name}" onchange="window.updateMasterField('cashout', ${idx}, 'name', this.value)" class="w-20 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-white">
-              <input type="text" value="${item.amount ? formatNum(item.amount) : ''}" placeholder="0" onchange="window.updateMasterField('cashout', ${idx}, 'amount', this.value)" class="w-24 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-indigo-400 font-bold text-right">
-              <button onclick="window.removeCashoutRow(${idx})" class="text-rose-400 hover:text-rose-300 px-1"><i class="fa-solid fa-xmark"></i></button>
+            <div class="flex items-center gap-1.5 bg-slate-900 p-1.5 rounded-lg">
+              <input type="text" value="${escapeAttr(item.name)}" onchange="window.updateMasterField('cashout', ${idx}, 'name', this.value)" class="w-16 shrink-0 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-white font-semibold">
+              <input type="text" value="${item.amount !== 0 ? formatNum(item.amount) : ''}" placeholder="0" onchange="window.updateMasterField('cashout', ${idx}, 'amount', this.value)" class="flex-1 min-w-0 bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-xs text-indigo-400 font-bold text-right">
+              <button type="button" onclick="window.removeCashoutRow(${idx})" class="text-rose-400 hover:text-rose-300 px-1 shrink-0" title="Hapus baris"><i class="fa-solid fa-xmark"></i></button>
             </div>
           `;
         }).join('');
         document.getElementById('master-cashout-total').textContent = formatNum(totalCashout);
 
+        // Render Kolom TOTAL (HASIL)
         const totalRowsContainer = document.getElementById('master-total-rows');
         let grandTotalHasil = 0;
         const rowDivisor = masterQrisRows.length > 0 ? masterQrisRows.length : 1;
@@ -1398,13 +1533,14 @@
 
           return `
             <div class="flex items-center justify-between bg-slate-900 p-2 rounded-lg">
-              <span class="text-slate-300 font-semibold">${qItem.name || 'Baris ' + (idx+1)}</span>
-              <span class="font-bold text-emerald-400">${formatNum(siteHasil)}</span>
+              <span class="text-slate-300 font-semibold truncate mr-2">${qItem.name || 'Baris ' + (idx + 1)}</span>
+              <span class="font-bold text-emerald-400 whitespace-nowrap">${formatNum(siteHasil)}</span>
             </div>
           `;
         }).join('');
         document.getElementById('master-total-all').textContent = formatNum(grandTotalHasil);
 
+        // Update Ringkasan Akhir (ALL)
         const finalHasil = totalQris - totalAkrn - totalAdminFee - totalCashout;
         document.getElementById('summary-all-qris').textContent = formatNum(totalQris);
         document.getElementById('summary-all-akrn').textContent = formatNum(totalAkrn);
@@ -1425,7 +1561,8 @@
         } else if (type === 'cashout') {
           masterCashoutRows[idx][field] = field === 'amount' ? parseNum(val) : val;
         }
-        saveToCloud(() => renderGlobalMasterDashboard());
+        renderGlobalMasterDashboard();
+        saveToCloud(null, true);
       };
 
       function renderMasterRecordsTable() {
@@ -1485,6 +1622,7 @@
         const todayStr = new Date().toISOString().split('T')[0];
         document.getElementById('inputDateDirect').value = todayStr;
 
+        // Form Login
         document.getElementById('loginForm').addEventListener('submit', function(e) {
           e.preventDefault();
           const user = (document.getElementById('login-username').value || '').trim();
@@ -1536,8 +1674,15 @@
 
         // Modal Ganti Sandi Admin
         const adminPassModal = document.getElementById('adminPassModal');
-        const openAdminPass = () => { adminPassModal.classList.remove('hidden'); adminPassModal.classList.add('flex'); };
-        const closeAdminPass = () => { adminPassModal.classList.add('hidden'); adminPassModal.classList.remove('flex'); };
+        const openAdminPass = () => {
+          document.getElementById('admin-pass-error').classList.add('hidden');
+          adminPassModal.classList.remove('hidden');
+          adminPassModal.classList.add('flex');
+        };
+        const closeAdminPass = () => {
+          adminPassModal.classList.add('hidden');
+          adminPassModal.classList.remove('flex');
+        };
         
         document.getElementById('btn-admin-change-pass').addEventListener('click', openAdminPass);
         document.getElementById('btnCloseAdminPass').addEventListener('click', closeAdminPass);
@@ -1563,6 +1708,7 @@
           });
         });
 
+        // Modal Pengaturan Master & Fee
         document.getElementById('btnOpenFeeModal').addEventListener('click', function() {
           document.getElementById('setting-fee-up').value = fees.up;
           document.getElementById('setting-fee-down').value = fees.down;
@@ -1581,6 +1727,7 @@
         document.getElementById('btnCloseFeeModal').addEventListener('click', closeFeeModal);
         document.getElementById('btnCloseFeeModal2').addEventListener('click', closeFeeModal);
 
+        // Modal Tambah Toko Baru
         const closeAddStore = () => { document.getElementById('addStoreModal').classList.add('hidden'); document.getElementById('addStoreModal').classList.remove('flex'); };
         document.getElementById('btnCloseAddStore').addEventListener('click', closeAddStore);
         document.getElementById('btnCloseAddStore2').addEventListener('click', closeAddStore);
@@ -1599,6 +1746,12 @@
           siteNames.push(name);
           const newIdx = siteNames.length - 1;
           siteEntriesMap[newIdx] = [];
+
+          // Tambahkan otomatis ke daftar baris QRIS Global Master
+          const existsInQris = masterQrisRows.some(r => (r.name || '').trim().toUpperCase() === name);
+          if (!existsInQris) {
+            masterQrisRows.push({ name: name, amount: 0 });
+          }
 
           saveToCloud(() => {
             closeAddStore();
@@ -1627,6 +1780,7 @@
           });
         });
 
+        // Kontrol Tanggal Form Harian
         document.getElementById('btnResetToToday').addEventListener('click', function() {
           const tDay = new Date().toISOString().split('T')[0];
           document.getElementById('inputDateDirect').value = tDay;
@@ -1663,6 +1817,9 @@
           document.getElementById('live-pending').textContent = '0';
           document.getElementById('live-sisa').textContent = '0';
           document.getElementById('live-total-bersih').textContent = '0';
+          document.getElementById('preview-up-nett').textContent = '0';
+          document.getElementById('preview-down-nett').textContent = '0';
+          document.getElementById('preview-ew-nett').textContent = '0';
         }
 
         document.getElementById('btnResetSample').addEventListener('click', function() {
@@ -1734,6 +1891,7 @@
           });
         });
 
+        // Filter Tabel Harian
         document.getElementById('btnApplyFilter').addEventListener('click', renderTable);
         document.getElementById('btnClearFilter').addEventListener('click', function() {
           document.getElementById('filterStartDate').value = '';
@@ -1742,6 +1900,7 @@
           showToast('Filter direset');
         });
 
+        // Input Saldo QRIS Mingguan Per Toko
         document.getElementById('store-qris-input').addEventListener('input', function() {
           if (!storeWeeklyInputs[activeSiteIndex]) storeWeeklyInputs[activeSiteIndex] = { qris: 0, records: [] };
           storeWeeklyInputs[activeSiteIndex].qris = parseNum(this.value);
@@ -1753,11 +1912,13 @@
           if (!storeWeeklyInputs[activeSiteIndex]) storeWeeklyInputs[activeSiteIndex] = { qris: 0, records: [] };
           storeWeeklyInputs[activeSiteIndex].qris = val;
           renderStoreWeeklyDashboard();
+          saveToCloud(null, true);
         });
 
         document.getElementById('store-weekly-start').addEventListener('change', renderStoreWeeklyDashboard);
         document.getElementById('store-weekly-end').addEventListener('change', renderStoreWeeklyDashboard);
 
+        // Simpan Arsip Pertinggal Mingguan Per Toko
         document.getElementById('btnSaveStoreWeeklyRecord').addEventListener('click', function() {
           const start = document.getElementById('store-weekly-start').value;
           const end = document.getElementById('store-weekly-end').value;
@@ -1775,13 +1936,21 @@
             totalWd += m.withdraw;
           });
 
-          const qrisInput = storeWeeklyInputs[activeSiteIndex]?.qris || 0;
-          const selisih = (totalNett - totalWd) - qrisInput;
+          const netAfterWd = totalNett - totalWd;
+          const qrisInput = Number(storeWeeklyInputs[activeSiteIndex]?.qris) || 0;
+          const selisih = Math.round(netAfterWd) - qrisInput;
           const savedAt = new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' + new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
 
           if (!storeWeeklyInputs[activeSiteIndex]) storeWeeklyInputs[activeSiteIndex] = { qris: 0, records: [] };
           storeWeeklyInputs[activeSiteIndex].records.unshift({
-            start, end, totalNett, totalWd, qrisInput, selisih, savedAt
+            start,
+            end,
+            totalNett,
+            totalWd,
+            netAfterWd,
+            qrisInput,
+            selisih,
+            savedAt
           });
 
           saveToCloud(() => {
@@ -1800,8 +1969,13 @@
           });
         });
 
-        document.getElementById('master-start-date').addEventListener('change', renderGlobalMasterDashboard);
-        document.getElementById('master-end-date').addEventListener('change', renderGlobalMasterDashboard);
+        // Listener Tanggal Dashboard Global Master -> Otomatis isi QRIS dari Total Bersih Motion (stlh WD)
+        document.getElementById('master-start-date').addEventListener('change', function() {
+          autoPopulateMasterQrisFromDates(true, true);
+        });
+        document.getElementById('master-end-date').addEventListener('change', function() {
+          autoPopulateMasterQrisFromDates(true, true);
+        });
 
         document.getElementById('btnSaveMasterRecord').addEventListener('click', function() {
           const start = document.getElementById('master-start-date').value;
