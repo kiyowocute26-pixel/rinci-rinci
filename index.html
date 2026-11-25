@@ -328,38 +328,67 @@
             </div>
           </div>
 
-          <!-- 4 Kartu Utama -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
-              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">TOTAL BERSIH MOTION</span>
-              <span id="store-card-motion" class="text-lg font-bold text-emerald-400">0</span>
-            </div>
-            <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">SELISIH AKHIR</span>
-                <span id="store-selisih-status" class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-800 text-slate-300">ISI</span>
+          <!-- 5 Kartu Utama (Total Bersih Motion Setelah WD, Total Withdraw, Selisih Akhir, Saldo QRIS, Simpan Pertinggal) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <!-- Kartu 1: Total Bersih Motion (Sudah Dipotong Total Withdraw) -->
+            <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+              <div>
+                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">TOTAL BERSIH MOTION</span>
+                <span id="store-card-motion" class="text-lg font-bold text-emerald-400 block">0</span>
               </div>
-              <span id="store-card-selisih" class="text-lg font-bold text-cyan-400">0</span>
+              <div class="mt-2 pt-2 border-t border-slate-800/80 text-[11px] text-slate-400 flex items-center justify-between">
+                <span>Sebelum WD:</span>
+                <span id="store-card-motion-gross" class="font-semibold text-slate-300">0</span>
+              </div>
             </div>
+
+            <!-- Kartu 2: Total Withdraw -->
+            <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+              <div>
+                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">TOTAL WITHDRAW</span>
+                <span id="store-card-withdraw" class="text-lg font-bold text-rose-400 block">0</span>
+              </div>
+              <div class="mt-2 pt-2 border-t border-slate-800/80 text-[11px] text-slate-500">
+                <span>Akumulasi WD periode</span>
+              </div>
+            </div>
+
+            <!-- Kartu 3: Selisih Akhir -->
+            <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">SELISIH AKHIR</span>
+                  <span id="store-selisih-status" class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-800 text-slate-300">ISI</span>
+                </div>
+                <span id="store-card-selisih" class="text-lg font-bold text-cyan-400 block">0</span>
+              </div>
+              <div class="mt-2 pt-2 border-t border-slate-800/80 text-[11px] text-slate-500">
+                <span>Target selisih: 0</span>
+              </div>
+            </div>
+
+            <!-- Kartu 4: Saldo QRIS Mingguan -->
             <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
               <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">SALDO QRIS MINGGUAN</span>
               <input type="text" id="store-qris-input" placeholder="Masukkan Saldo QRIS"
-                class="w-full bg-slate-900 border border-amber-500/50 rounded-xl px-3 py-1.5 text-white font-bold text-sm focus:outline-none focus:border-amber-400 text-right">
+                class="w-full bg-slate-900 border border-amber-500/50 rounded-xl px-3 py-2 text-white font-bold text-sm focus:outline-none focus:border-amber-400 text-right">
             </div>
+
+            <!-- Kartu 5: Simpan Pertinggal -->
             <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
               <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">SIMPAN PERTINGGAL</span>
-              <button id="btnSaveStoreWeeklyRecord" class="w-full py-2 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs shadow-md shadow-amber-600/30 transition-all flex items-center justify-center gap-1.5">
+              <button id="btnSaveStoreWeeklyRecord" class="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs shadow-md shadow-amber-600/30 transition-all flex items-center justify-center gap-1.5">
                 <i class="fa-solid fa-bookmark"></i>
                 <span>Simpan Saldo Minggu Ini</span>
               </button>
             </div>
           </div>
 
-          <!-- Tabel Rincian Kategori Fee Sesuai Screenshot -->
+          <!-- Tabel Rincian Kategori Fee -->
           <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3">
-            <div class="flex items-center justify-between text-xs text-slate-400">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-400">
               <span id="feeTablePeriodLabel" class="font-bold text-slate-300">PERIODE: -</span>
-              <span class="italic">Rumus: Total Bersih Motion - Total WD - Saldo QRIS = Selisih</span>
+              <span class="italic">Rumus: (Total Bersih Motion - Total WD) - Saldo QRIS = Selisih</span>
             </div>
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse text-xs">
@@ -615,6 +644,41 @@
         <button type="button" id="btnCloseAddStore2" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">Batal</button>
         <button type="button" id="btnSubmitAddStore" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold">Tambah</button>
       </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL GANTI SANDI ADMIN ================= -->
+  <div id="adminPassModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-6 space-y-5">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h3 class="font-bold text-white text-base flex items-center gap-2">
+          <i class="fa-solid fa-key text-amber-400"></i>
+          <span>Ganti Kata Sandi Admin</span>
+        </h3>
+        <button id="btnCloseAdminPass" class="text-slate-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <form id="adminPassForm" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Sandi Lama</label>
+          <input type="password" id="admin-old-pass" required placeholder="Masukkan sandi lama"
+            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Sandi Baru</label>
+          <input type="password" id="admin-new-pass" required placeholder="Masukkan sandi baru"
+            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500">
+        </div>
+        <div id="admin-pass-error" class="hidden p-2.5 bg-red-950/50 border border-red-800/60 rounded-xl text-xs text-red-300 text-center font-medium">
+          Sandi lama salah!
+        </div>
+        <div class="flex items-center justify-end gap-3 pt-2">
+          <button type="button" id="btnCloseAdminPass2" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">Batal</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-lg shadow-indigo-600/30">Simpan Sandi</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -921,8 +985,8 @@
 
         return {
           panel, doc, pending,
-          upKotor, upFee1: upKotor * (fees.up / 100), upFee2, upNett,
-          downKotor, downFee1: downKotor * (fees.down / 100), downFee2, downNett,
+          upKotor, upFee1, upFee2, upNett,
+          downKotor, downFee1, downFee2, downNett,
           ewKotor, ewFee, ewNett,
           totalMotionKotor, totalMotionNett,
           withdraw, sisa
@@ -1139,13 +1203,20 @@
         });
 
         const totalNett = upNett + downNett + ewNett;
+        const motionSetelahWd = totalNett - totalWd;
         const totKotor = upK + downK + ewK;
         const tot150 = up150 + down150 + ew150;
         const tot055 = down055;
         const tot080 = up080;
 
-        document.getElementById('store-card-motion').textContent = formatNum(totalNett);
+        // Kartu 1: Total Bersih Motion (Sudah Dipotong Total Withdraw) + Info Sebelum WD
+        document.getElementById('store-card-motion').textContent = formatNum(motionSetelahWd);
+        document.getElementById('store-card-motion-gross').textContent = formatNum(totalNett);
 
+        // Kartu 2: Total Withdraw
+        document.getElementById('store-card-withdraw').textContent = formatNum(totalWd);
+
+        // Tabel Rincian Kategori Fee
         document.getElementById('feeTablePeriodLabel').textContent = `PERIODE: ${start ? formatDateID(start) : '-'} S/D ${end ? formatDateID(end) : '-'}`;
         document.getElementById('fee-up-kotor').textContent = formatNum(upK);
         document.getElementById('fee-up-150').textContent = formatNum(up150);
@@ -1167,14 +1238,21 @@
         document.getElementById('fee-tot-080').textContent = formatNum(tot080);
         document.getElementById('fee-tot-nett').textContent = formatNum(totalNett);
 
+        // Sinkronisasi input Saldo QRIS saat pindah toko / sync jika tidak sedang diketik
         if (!storeWeeklyInputs[activeSiteIndex]) storeWeeklyInputs[activeSiteIndex] = { qris: 0, records: [] };
         const qrisInput = Number(storeWeeklyInputs[activeSiteIndex].qris) || 0;
+        const qrisInputEl = document.getElementById('store-qris-input');
+        if (qrisInputEl && document.activeElement !== qrisInputEl) {
+          qrisInputEl.value = qrisInput !== 0 ? formatNum(qrisInput) : '';
+        }
         
-        const selisih = totalNett - totalWd - qrisInput;
+        // Rumus: (Total Bersih Motion - Total WD) - Saldo QRIS = Selisih Akhir
+        const selisih = (totalNett - totalWd) - qrisInput;
         document.getElementById('store-card-selisih').textContent = formatNum(selisih);
 
         const statusEl = document.getElementById('store-selisih-status');
-        if (!qrisInput && qrisInput !== 0) {
+        const rawQrisStr = qrisInputEl ? qrisInputEl.value.trim() : '';
+        if (rawQrisStr === '' && qrisInput === 0) {
           statusEl.textContent = 'ISI';
           statusEl.className = 'text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-800 text-slate-300';
         } else if (selisih === 0) {
@@ -1198,7 +1276,7 @@
           return;
         }
 
-        tbody.innerHTML = data.map((item, idx) => `
+        tbody.innerHTML = data.map((item) => `
           <tr class="hover:bg-slate-900/40">
             <td class="p-3 font-bold text-indigo-300">${formatDateID(item.start)} s/d ${formatDateID(item.end)}</td>
             <td class="p-3 text-emerald-400 font-semibold">${formatNum(item.totalNett)}</td>
@@ -1308,9 +1386,10 @@
 
         const totalRowsContainer = document.getElementById('master-total-rows');
         let grandTotalHasil = 0;
+        const rowDivisor = masterQrisRows.length > 0 ? masterQrisRows.length : 1;
         totalRowsContainer.innerHTML = masterQrisRows.map((qItem, idx) => {
           const qVal = Number(qItem.amount) || 0;
-          const pShare = totalQris > 0 ? (qVal / totalQris) : (1 / masterQrisRows.length);
+          const pShare = totalQris > 0 ? (qVal / totalQris) : (1 / rowDivisor);
           const siteAkrn = totalAkrn * pShare;
           const siteFee = totalAdminFee * pShare;
           const siteCashout = totalCashout * pShare;
@@ -1455,6 +1534,35 @@
           document.getElementById('login-password').value = '';
         });
 
+        // Modal Ganti Sandi Admin
+        const adminPassModal = document.getElementById('adminPassModal');
+        const openAdminPass = () => { adminPassModal.classList.remove('hidden'); adminPassModal.classList.add('flex'); };
+        const closeAdminPass = () => { adminPassModal.classList.add('hidden'); adminPassModal.classList.remove('flex'); };
+        
+        document.getElementById('btn-admin-change-pass').addEventListener('click', openAdminPass);
+        document.getElementById('btnCloseAdminPass').addEventListener('click', closeAdminPass);
+        document.getElementById('btnCloseAdminPass2').addEventListener('click', closeAdminPass);
+
+        document.getElementById('adminPassForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const oldP = document.getElementById('admin-old-pass').value;
+          const newP = document.getElementById('admin-new-pass').value;
+          const errDiv = document.getElementById('admin-pass-error');
+
+          if (oldP !== credentials.adminPass) {
+            errDiv.classList.remove('hidden');
+            return;
+          }
+          errDiv.classList.add('hidden');
+          credentials.adminPass = newP;
+          saveToCloud(() => {
+            closeAdminPass();
+            document.getElementById('admin-old-pass').value = '';
+            document.getElementById('admin-new-pass').value = '';
+            showToast('Sandi Admin berhasil diubah!');
+          });
+        });
+
         document.getElementById('btnOpenFeeModal').addEventListener('click', function() {
           document.getElementById('setting-fee-up').value = fees.up;
           document.getElementById('setting-fee-down').value = fees.down;
@@ -1514,6 +1622,7 @@
             closeFeeModal();
             renderSiteTabs();
             renderTable();
+            renderStoreWeeklyDashboard();
             showToast('Pengaturan akun & fee berhasil disimpan!');
           });
         });
@@ -1667,7 +1776,7 @@
           });
 
           const qrisInput = storeWeeklyInputs[activeSiteIndex]?.qris || 0;
-          const selisih = totalNett - totalWd - qrisInput;
+          const selisih = (totalNett - totalWd) - qrisInput;
           const savedAt = new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' + new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
 
           if (!storeWeeklyInputs[activeSiteIndex]) storeWeeklyInputs[activeSiteIndex] = { qris: 0, records: [] };
